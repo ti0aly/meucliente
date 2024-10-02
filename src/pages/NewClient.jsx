@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { X, Check } from "lucide-react";
 
 function NewClient() {
-    const {clients, updateClients, addClient} = useContext(ClientsContext);
+    const {clients, updateClients, addClient, setData, deleteData, getData} = useContext(ClientsContext);
     const navigate = useNavigate();
-    let randomId = Math.floor(Math.random() * 9000000000) + 1000000000;
+    const randomId = Math.floor(Math.random() * 9000000000) + 1000000000;
     
     const [clientName, setClientName] = useState();
     const handleChangeName = (event) => {
@@ -99,6 +99,7 @@ function NewClient() {
                         <button className="bg-blue-200 rounded-md p-1 text-lg w-28"
                         onClick={() =>{
                             addClient(newClient);
+                            setData('clientesdegusta', randomId, newClient);
                             navigate(-1);
                             }}>
                             Salvar

@@ -1,6 +1,8 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { doc, getDoc, setDoc, getDocs, collection } from 'firebase/firestore'
+import { db } from './firebase-config'
 import ClientsContext from './contexts/ClientsContext'
 import ClientPage from './pages/ClientPage'
 import InitialPage from './pages/InitialPage'
@@ -8,14 +10,48 @@ import NewClient from './pages/NewClient'
 import EditClientPage from './pages/EditClientPage'
 
 function App() {
-  const [clients, setClients] = useState([{
-    id: 1,
-    name: "Marilia pera",
-    phone: 47999116611,
-    data: "25/99/10",
+  const getData = async (folder, clientId) => {
+    const docRef = doc(db, folder, String(clientId));
+    const docSnap = await getDoc(docRef);
+    return docSnap;
+  }
+  const setData = async (folder, clientId, clientObject) => {
+    const docRef = doc(db, folder, String(clientId));
+    const docSnap = await setDoc(docRef, clientObject);
+  }
+  const deleteData = async (folder, clientId) => {
+    const docRef = doc(db, folder, clientId);
+    try {
+      await deleteDoc(docRef);
+      console.log(`Documento com ID ${clientId} foi apagado com sucesso!`);
+    } catch (error) {
+      console.error("Erro ao apagar o documento: ", error);
+    }
+  }
+  
+  const receiveClients = async (folder) => {
+    const clientsCollection = collection(db, folder);
+    const clientsSnapshot = await getDocs(clientsCollection);
+    const clientsList = clientsSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }))
+    return clientsList
+  }
+  const clientListArray = async () => {
+    const clientData = await receiveClients('clientesdegusta');
+    setClients(clientData);
+  }
+  
+  const [clients, setClients] = useState([   
+    {
+    id: 0,
+    name: "Adicione seus clientes",
+    phone: 0,
+    data: "00/00/0000",
+    cidade: "",
+    convidados: 0,
     isDataAvailable: false,
-    cidade: "Jaguara do Sul",
-    convidados: 130,
     clientStatus: 0,
     isContacted: false,
     isBudgetSentToClient: false,
@@ -24,75 +60,11 @@ function App() {
     isContractSigned: false,
     isDepositPaid: false,
     isTotalContractAmountPaid: false,
-  },
-  {
-    id: 2,
-    name: "Lucas Maria",
-    phone: 47999116611,
-    data: "25/99/10",
-    isDataAvailable: true,
-    cidade: "Joinville",
-    convidados: null,
-    clientStatus: 0,
-    isContacted: true,
-    isBudgetSentToClient: false,
-    isBudgetResponded: false,
-    isContractCreated: false,
-    isContractSigned: false,
-    isDepositPaid: false,
-    isTotalContractAmountPaid: false,
-  },
-  {
-    id: 3,
-    name: "Antônia Cléia",
-    phone: 47999116611,
-    data: "25/99/10",
-    isDataAvailable: true,
-    cidade: "",
-    convidados: null,
-    clientStatus: 1,
-    isContacted: false,
-    isBudgetSentToClient: false,
-    isBudgetResponded: false,
-    isContractCreated: false,
-    isContractSigned: false,
-    isDepositPaid: false,
-    isTotalContractAmountPaid: false,
-  },
-  {
-    id: 4,
-    name: "Cintia",
-    phone: 47997817663,
-    data: "15/11/24",
-    isDataAvailable: true,
-    cidade: "",
-    convidados: null,
-    clientStatus: 0,
-    isContacted: false,
-    isBudgetSentToClient: false,
-    isBudgetResponded: false,
-    isContractCreated: false,
-    isContractSigned: false,
-    isDepositPaid: false,
-    isTotalContractAmountPaid: false,
-  },
-  {
-    id: 5,
-    name: "Nara",
-    phone: 47999503983,
-    data: "16/08/25",
-    isDataAvailable: true,
-    cidade: "Joinville",
-    convidados: null,
-    clientStatus: 0,
-    isContacted: false,
-    isBudgetSentToClient: false,
-    isBudgetResponded: false,
-    isContractCreated: false,
-    isContractSigned: false,
-    isDepositPaid: false,
-    isTotalContractAmountPaid: false,
-  },])
+  }
+]);
+
+  window.onload = (clientListArray);
+
   const updateClients = (id, newClientData) => {
     setClients((prevClients) =>
       prevClients.map((client) =>
@@ -113,7 +85,7 @@ function App() {
     console.log("Clientes atualizados: ", clients);
   }, [clients]);
   return (
-    <ClientsContext.Provider value={{clients, updateClients, addClient}}>
+    <ClientsContext.Provider value={{clients, updateClients, addClient, setData, getData, deleteData}}>
       <Routes>
         <Route path="/meucliente/" element={<InitialPage />} />
         <Route path="/meucliente/client/" element={<ClientPage />} />
