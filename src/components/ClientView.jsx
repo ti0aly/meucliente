@@ -26,7 +26,7 @@ function ClientView() {
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
-                            navigate(`/client?${query.toString()}`);
+                            navigate(`./client?${query.toString()}`);
                         }}
                         >
                         <p className="flex justify-center">{client.name}</p>
