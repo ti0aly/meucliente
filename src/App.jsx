@@ -108,8 +108,8 @@ function App() {
   return (
     <ClientsContext.Provider value={{clients, updateClients}}>
       <Routes>
-        <Route path="/meucliente" element={<InitialPage />} />
-        <Route path="client" element={<ClientPage />} />
+        <Route path="/meucliente/" element={<InitialPage />} />
+        <Route path="/meucliente/client" element={<ClientPage />} />
       </Routes>
     </ClientsContext.Provider>
   )
