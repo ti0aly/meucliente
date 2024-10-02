@@ -1,5 +1,6 @@
 import CheckListItem from "./CheckListItem";
 import ClientsContext from "../contexts/ClientsContext";
+import { X, Check } from "lucide-react";
 import { useContext } from "react";
 
 function CheckList(props) {
@@ -13,52 +14,59 @@ function CheckList(props) {
                 <CheckListItem item="Cidade:">{client.cidade}</CheckListItem>
                 <CheckListItem item="Nº celular:">{client.phone}</CheckListItem>
                 <CheckListItem item="Nº de convidados:">{client.convidados === null && "?" || client.convidados }</CheckListItem>
-                <CheckListItem item="Primeiro Contato:">
-                    <div className="toggle-switch">
-                        <input type="checkbox" checked={client.isContacted} onChange={() => updateClients(Number(clientId),  {isContacted: !client.isContacted} )} />
-                        <span className="slider"></span>
-                    </div>
-                </CheckListItem>
-                
-                
+ 
                 <CheckListItem item="Data disponível?">
-                    <div className="toggle-switch">
-                        <input type="checkbox" checked={client.isDataAvailable} onChange={() => updateClients(Number(clientId),  {isDataAvailable: !client.isDataAvailable} )} />
-                        <span className="slider"></span>
-                    </div>
-                    {/* {client.isDataAvailable === true && "sim" || "não"}*/}
+                    <button  
+                        onClick={() => updateClients(Number(clientId),  {isDataAvailable : !client.isDataAvailable } )} 
+                        >
+                        {client.isDataAvailable
+                         && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                    </button>
                 </CheckListItem> 
-                
-                
-                <CheckListItem item="Orçamento enviado:">
-                    <div className="toggle-switch">
-                        <input type="checkbox" checked={client.isBudgetSentToClient} onChange={() => updateClients(Number(clientId),  {isBudgetSentToClient: !client.isBudgetSentToClient} )} />
-                        <span className="slider"></span>
-                    </div>
-                    
-                    {/* {client.isBudgetSentToClient === true && "sim" || "não"} */}
+
+                <CheckListItem item="Primeiro Contato:">
+                    <button  
+                        onClick={() => updateClients(Number(clientId),  {isClienteContacted : !client.isClienteContacted } )} 
+                        >
+                        {client.isClienteContacted
+                         && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                    </button>
                 </CheckListItem>
+              
+                <CheckListItem item="Orçamento enviado?">
+                        <button  
+                            onClick={() => updateClients(Number(clientId),  {isBudgetSentToClient: !client.isBudgetSentToClient} )} 
+                            >
+                            {client.isBudgetSentToClient && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                        </button>
+                </CheckListItem> 
+
                 <CheckListItem item="Feedback orçamento:">
-                    <div className="toggle-switch">
-                        <input type="checkbox" checked={client.isBudgetResponded} onChange={() => updateClients(Number(clientId),  {isBudgetResponded: !client.isBudgetResponded} )} />
-                        <span className="slider"></span>
-                    </div>
-                    {/* {client.isBudgetResponded === true && "sim" || "não"} */}
-                </CheckListItem>
+
+                    <button  
+                        onClick={() => updateClients(Number(clientId),  {isBudgetResponded: !client.isBudgetResponded} )} 
+                        >
+                        {client.isBudgetResponded && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                    </button>
+                </CheckListItem> 
+
                 <CheckListItem item="Dados pra contrato:">
-                <div className="toggle-switch">
-                    <input type="checkbox" checked={client.isContractCreated} onChange={() => updateClients(Number(clientId),  {isContractCreated: !client.isContractCreated} )} />
-                        <span className="slider"></span>
-                    </div>
-                    {/* {client.isContractCreated === true && "sim" || "não"} */}
-                </CheckListItem>
-                <CheckListItem item="Entrada efetuada:">
-                    <div className="toggle-switch">
-                        <input type="checkbox" checked={client.isDepositPaid} onChange={() => updateClients(Number(clientId),  {isDepositPaid: !client.isDepositPaid} )} />
-                        <span className="slider"></span>
-                    </div>
-                    {/* {client.isDepositPaid === true && "sim" || "não"} */}
-                </CheckListItem>
+                    <button  
+                        onClick={() => updateClients(Number(clientId),  {isContractCreated: !client.isContractCreated} )} 
+                        >
+                        {client.isContractCreated && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                    </button>
+                </CheckListItem> 
+
+                <CheckListItem item="Entrada efetuada?">
+
+                    <button 
+                        onClick={() => updateClients(Number(clientId),  {isDepositPaid: !client.isDepositPaid} )} 
+                        >
+                        {client.isDepositPaid && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                    </button>
+                </CheckListItem> 
+
             </ul>
         </div>
     )

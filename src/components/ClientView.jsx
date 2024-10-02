@@ -14,7 +14,6 @@ function ClientView() {
         "Venda finalizada"
       ];
     const {clients, updateClients} = useContext(ClientsContext);
-    console.log("clients no CLinetView", clients);
     return (
      <div className="bg-slate-300 rounded-md flex justify-evenly flex-wrap gap-2 p-2 text-lg" >
         

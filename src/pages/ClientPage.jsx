@@ -50,23 +50,31 @@ function ClientPage() {
                     <ChevronLeftIcon />
                 </button>
                 <CheckList clientId={clientId}></CheckList>
-                <button
-                    onClick={() => {
-                        const name = client.name;
-                        const phone = client.phone;
-                        const msg = mensagens[client.clientStatus];
-                        const mensagemFormatada = encodeURIComponent(msg);
-                        window.open(`https://api.whatsapp.com/send?phone=+55${phone}&text=${mensagemFormatada}`, '_blank')
-                    }}
-                    className="rounded-md bg-green-400 p-1">
-                    Enviar mensagem
-                </button>
-                <button
-                    // vou deixar esse botão de exemplo pra edição das variaveis dos objetos
-                    onClick={() => updateClients(Number(clientId),  {isBudgetResponded: true} )}
-                    className="rounded-md bg-green-400 p-1 m-1">
-                    Exemplo botão
-                </button>
+
+                <div className="flex space-x-2 justify-around py-5">
+                    <button
+                        onClick={() => {
+                            const query = new URLSearchParams();
+                            query.set("id", client.id);
+                            navigate(`/meucliente/editclient?${query.toString()}`);
+                        }}
+                        className="bg-slate-50 rounded-md p-1 text-lg w-32">
+                        Editar cliente
+                    </button>
+                    <button
+                        onClick={() => {
+                            const name = client.name;
+                            const phone = client.phone;
+                            const msg = mensagens[client.clientStatus];
+                            const mensagemFormatada = encodeURIComponent(msg);
+                            window.open(`https://api.whatsapp.com/send?phone=+55${phone}&text=${mensagemFormatada}`, '_blank')
+                        }}
+                        className="bg-green-300 rounded-md p-1 text-lg w-32">
+                        Enviar mensagem
+                    </button>
+
+
+                </div>
             </div>
         </div>
     )

@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom'
 import ClientsContext from './contexts/ClientsContext'
 import ClientPage from './pages/ClientPage'
 import InitialPage from './pages/InitialPage'
+import NewClient from './pages/NewClient'
+import EditClientPage from './pages/EditClientPage'
 
 function App() {
   const [clients, setClients] = useState([{
@@ -94,22 +96,29 @@ function App() {
   const updateClients = (id, newClientData) => {
     setClients((prevClients) =>
       prevClients.map((client) =>
-
-        client.id === id ? { ...client, ...newClientData } : client
-        
+        client.id === id ? { ...client, ...newClientData } : client 
       )
       
     );
-
   }
+  const addClient = (newClientData) => {
+    setClients((prevClients) => [
+      ...prevClients,
+      { ...newClientData } 
+    ]);
+  };
+
+
   useEffect(() => {
     console.log("Clientes atualizados: ", clients);
   }, [clients]);
   return (
-    <ClientsContext.Provider value={{clients, updateClients}}>
+    <ClientsContext.Provider value={{clients, updateClients, addClient}}>
       <Routes>
         <Route path="/meucliente/" element={<InitialPage />} />
         <Route path="/meucliente/client/" element={<ClientPage />} />
+        <Route path="/meucliente/newclient/" element={<NewClient />}/>
+        <Route path="/meucliente/editclient/" element={<EditClientPage />}/>
       </Routes>
     </ClientsContext.Provider>
   )
