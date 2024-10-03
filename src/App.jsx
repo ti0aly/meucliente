@@ -1,4 +1,3 @@
-import './App.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { doc, getDoc, setDoc, getDocs, collection, deleteDoc } from 'firebase/firestore'

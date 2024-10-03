@@ -20,24 +20,17 @@ function ClientPage() {
     const navigate = useNavigate();
     const [params] = useSearchParams();
     const clientId = params.get('id');
-
-
-    // const [clients, setClients] = useState(
-    //     // converte a string salva no navegador para objeto
-    //     JSON.parse(localStorage.getItem("clients")) || []
-    //   );
     
     const client = clients.find(client => client.id === Number(clientId));
+    console.log(client);
     const mensagens = [
-        `Olá ${client.name}, sou o Alysson da banda DEGUSTASOM, tudo bem? Entro em contato pela solicitação de orçamento recebida. 
-        Verifiquei sua data e ainda está disponível!
-        Gostaria de confirmar contigo a cidade e o número aproximado de convidados que estão calculando, para poder te passar valores.`,
+        `Olá ${(client.name).split(" ")[0]}, aqui é o Alysson da banda DEGUSTASOM, tudo bem? Entro em contato pela solicitação de orçamento recebida.\n\nVerifiquei sua data ${client.data !== "" && client.data || "" } e ainda está disponível, gostaria de confirmar contigo a cidade e o número aproximado de convidados que estão calculando, para poder te passar valores.`,
         `Olá ${client.name}, segue o orçamento solicitado.`,
         `Olá ${client.name}, tudo bem? O que acharam da nossa proposta? Está dentro do que estavam prevendo de orçamento pra música do casamento?`
      ] ;
     return (
         <div className="flex justify-center">
-            <div className="bg-slate-200 min-w-80 max-w-lg w-auto rounded-md flex-row space-y-3 p-4">
+            <div className="bg-slate-200 min-w-80 max-w-lg text-center  rounded-md flex-row space-y-3 p-2 h-screen ">
                 <Title>
                     {client.name}
                 </Title>
@@ -59,8 +52,9 @@ function ClientPage() {
                             navigate(`/meucliente/editclient?${query.toString()}`);
                         }}
                         className="bg-slate-50 rounded-md p-1 text-lg w-32">
-                        Editar cliente
+                        Editar
                     </button>
+
                     <button
                         onClick={() => {
                             const name = client.name;
@@ -70,7 +64,7 @@ function ClientPage() {
                             window.open(`https://api.whatsapp.com/send?phone=+55${phone}&text=${mensagemFormatada}`, '_blank')
                         }}
                         className="bg-green-300 rounded-md p-1 text-lg w-32">
-                        Enviar mensagem
+                        Whatsapp
                     </button>
 
 

@@ -11,16 +11,17 @@ function InitialPage() {
     };
     const navigate = useNavigate();
     return (
-    <div className='flex justify-center bg-slate-200 min-w-80 rounded-md p-2'>
-        <div className="max-w-2xl min-w-80 space-y-1">
-            <Title>Meu Cliente</Title>
-            <Subtitle>Fluxo pré-venda</Subtitle>
-            <ClientView></ClientView>
-            <button className="bg-blue-200 rounded-md p-2 text-xl" onClick={() =>{ navigate('./newclient')}}>
-                Adicionar novo cliente
-            </button>
+        <div className='flex justify-center bg-slate-200 min-w-80 text-center h-screen'>
+            <div className="max-w-2xl min-w-80 space-y-1">
+                <Title>Meu Cliente</Title>
+                <Subtitle>Fluxo pré-venda</Subtitle>
+                <ClientView></ClientView>
+                <button className="bg-blue-200 rounded-md p-2 text-xl" onClick={() =>{ navigate('./newclient')}}>
+                    Adicionar novo cliente
+                </button>
+            </div>
         </div>
-    </div>
+
     )
 }
 

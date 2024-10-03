@@ -6,6 +6,8 @@ import ClientsContext from "../contexts/ClientsContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Check } from "lucide-react";
+import ReactInputMask from "react-input-mask";
+
 
 function NewClient() {
     const {clients, updateClients, addClient, setData, deleteData, getData, addIndicator} = useContext(ClientsContext);
@@ -65,7 +67,7 @@ function NewClient() {
         isTotalContractAmountPaid: false,
     }
     return (
-        <div className='flex justify-center bg-slate-200 min-w-80 rounded-md p-2'>
+        <div className='flex justify-center bg-slate-200 min-w-80 p-1 h-screen text-center'>
             <div className="max-w-2xl min-w-80 space-y-1">
                 <Title>Novo Cliente</Title>
                 <Subtitle>Insira os dados abaixo:</Subtitle>
@@ -74,10 +76,24 @@ function NewClient() {
                         <input type="text" onChange={handleChangeName} className="w-60 rounded-md" id="clientName"></input>
                     </CheckListItem>
                     <CheckListItem item="Celular:">
-                        <input type="text" onChange={handleChangePhone} className="w-60 rounded-md" id="clientPhone"></input>
+                            <ReactInputMask
+                                className="w-60 rounded-md px-2" 
+                                id="clientPhone"
+                                onChange={handleChangePhone}
+                                mask="(99)99999-9999"
+                                placeholder="(XX)XXXXX-XXXX"
+                                required
+                            />
                     </CheckListItem>
                     <CheckListItem item="Data:">
-                        <input type="text" onChange={handleChangeDate} className="w-60 rounded-md" id="clientDate"></input>
+                        <ReactInputMask
+                            onChange={handleChangeDate} 
+                            className="w-60 rounded-md px-2" 
+                            id="clientDate"
+                            mask="99/99/9999"
+                            placeholder="XX/XX/XXXX"
+                            required
+                        />
                     </CheckListItem>
                     <CheckListItem item="Cidade:">
                         <input type="text" onChange={handleChangeCity} className="w-60 rounded-md" id="clientCity"></input>

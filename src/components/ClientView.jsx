@@ -6,9 +6,9 @@ import  ClientsContext from "../contexts/ClientsContext";
 function ClientView() {
     const navigate = useNavigate();
     const status = [
-        "Fazer primeiro contato", 
+        "Primeiro contato", 
         "Enviar orçamento", 
-        "Feedback do orçamento", 
+        "Feedback orçamento", 
         "Fazer contrato", 
         "Receber entrada", 
         "Venda finalizada"
@@ -28,8 +28,8 @@ function ClientView() {
                             navigate(`./client?${query.toString()}`);
                         }}
                         >
-                        <p className="flex justify-center">{client.name}</p>
-                        <p className="text-slate-400">Status: {status[client.clientStatus]}</p>
+                        <p className="flex justify-center">{(client.name).split(" ")[0] }<p>{client.data !== "" && ' (' + client.data + ')' || ""}</p>    </p>
+                        <p className="text-slate-400">{status[client.clientStatus]}</p>
                     </button>
                 </li>
             </ul>
