@@ -1,7 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { doc, getDoc, setDoc, getDocs, collection } from 'firebase/firestore'
+import { doc, getDoc, setDoc, getDocs, collection, deleteDoc } from 'firebase/firestore'
 import { db } from './firebase-config'
 import ClientsContext from './contexts/ClientsContext'
 import ClientPage from './pages/ClientPage'
@@ -15,15 +15,24 @@ function App() {
     const docSnap = await getDoc(docRef);
     return docSnap;
   }
+
   const setData = async (folder, clientId, clientObject) => {
     const docRef = doc(db, folder, String(clientId));
-    const docSnap = await setDoc(docRef, clientObject);
+    try {
+      await setDoc(docRef, clientObject);
+      setaddIndicator(true);
+    } catch (error) {
+      console.error("Error setting document:", error);
+    }
   }
+
   const deleteData = async (folder, clientId) => {
+    console.log("chamou delete data");
     const docRef = doc(db, folder, clientId);
     try {
       await deleteDoc(docRef);
       console.log(`Documento com ID ${clientId} foi apagado com sucesso!`);
+      setdellIndicator(true);
     } catch (error) {
       console.error("Erro ao apagar o documento: ", error);
     }
@@ -46,9 +55,9 @@ function App() {
   const [clients, setClients] = useState([   
     {
     id: 0,
-    name: "Adicione seus clientes",
+    name: ". . .",
     phone: 0,
-    data: "00/00/0000",
+    data: "",
     cidade: "",
     convidados: 0,
     isDataAvailable: false,
@@ -84,8 +93,11 @@ function App() {
   useEffect(() => {
     console.log("Clientes atualizados: ", clients);
   }, [clients]);
+
+  const [dellIndicator, setdellIndicator] = useState(false);
+  const [addIndicator, setaddIndicator] = useState(false);
   return (
-    <ClientsContext.Provider value={{clients, updateClients, addClient, setData, getData, deleteData}}>
+    <ClientsContext.Provider value={{clients, updateClients, addClient, setData, getData, deleteData, dellIndicator, addIndicator}}>
       <Routes>
         <Route path="/meucliente/" element={<InitialPage />} />
         <Route path="/meucliente/client/" element={<ClientPage />} />

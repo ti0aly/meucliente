@@ -3,44 +3,49 @@ import Title from "../components/Title";
 import Subtitle from "../components/Subtitle";
 import CheckListItem from "../components/CheckListItem";
 import ClientsContext from "../contexts/ClientsContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Check } from "lucide-react";
 
 function NewClient() {
-    const {clients, updateClients, addClient, setData, deleteData, getData} = useContext(ClientsContext);
+    const {clients, updateClients, addClient, setData, deleteData, getData, addIndicator} = useContext(ClientsContext);
     const navigate = useNavigate();
     const randomId = Math.floor(Math.random() * 9000000000) + 1000000000;
     
-    const [clientName, setClientName] = useState();
+    const [clientName, setClientName] = useState("");
     const handleChangeName = (event) => {
         setClientName(event.target.value);
     }
 
-    const [clientPhone, setClientPhone] = useState();
+    const [clientPhone, setClientPhone] = useState(Number);
     const handleChangePhone = (event) => {
         setClientPhone(event.target.value);
     }
 
-    const [clientDate, setclientDate] = useState();
+    const [clientDate, setclientDate] = useState("");
     const handleChangeDate = (event) => {
         setclientDate(event.target.value);
     }
 
-    const [clientCity, setclientCity] = useState();
+    const [clientCity, setclientCity] = useState("");
     const handleChangeCity = (event) => {
         setclientCity(event.target.value);
     }
 
-    const [clientGuests, setclientGuests] = useState();
+    const [clientGuests, setclientGuests] = useState(0);
     const handleChangeGuests = (event) => {
         setclientGuests(event.target.value);
     }
 
-    const [clientDataAvailable, setclientDataAvailable] = useState();
+    const [clientDataAvailable, setclientDataAvailable] = useState(false);
     const handleChangeDataAvailable = (event) => {
         setclientDataAvailable(!clientDataAvailable);
     }
+    useEffect(() => {
+        if (addIndicator) {
+          navigate(-1);
+        }
+      }, [addIndicator]); 
 
     let newClient = {
         id: randomId,
@@ -98,9 +103,15 @@ function NewClient() {
                         </button>
                         <button className="bg-blue-200 rounded-md p-1 text-lg w-28"
                         onClick={() =>{
-                            addClient(newClient);
-                            setData('clientesdegusta', randomId, newClient);
-                            navigate(-1);
+                            if (clientName === "") {
+                                alert("Não é possível criar um cliente sem nome, crie ao menos uma referência.")
+                            } else {
+                            //addClient(newClient);
+                            console.log("type of newClient: ", typeof newClient);
+                            console.log("newClient: ", newClient);
+                            setData("clientesdegusta", randomId, newClient);
+                            //navigate(-1);
+                            }
                             }}>
                             Salvar
                         </button>

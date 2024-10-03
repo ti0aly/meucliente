@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 
 function InitialPage() {
-    
+    window.onpopstate = function(event) {
+        location.reload();
+    };
     const navigate = useNavigate();
     return (
     <div className='flex justify-center bg-slate-200 min-w-80 rounded-md p-2'>

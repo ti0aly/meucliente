@@ -3,14 +3,14 @@ import Title from "../components/Title";
 import Subtitle from "../components/Subtitle";
 import CheckListItem from "../components/CheckListItem";
 import ClientsContext from "../contexts/ClientsContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { X, Check } from "lucide-react";
+
 
 function EditClientPage() {
     const [params] = useSearchParams();
     const clientId = params.get('id');
-    const {clients, updateClients, addClient} = useContext(ClientsContext);
+    const {clients, updateClients, addClient, deleteData, dellIndicator} = useContext(ClientsContext);
     const client = clients.find(client => client.id === Number(clientId));
     const navigate = useNavigate();
     
@@ -49,6 +49,13 @@ function EditClientPage() {
         convidados: clientGuests,
     };
 
+    useEffect(() => {
+        if (dellIndicator) {
+          navigate(-2)
+        }
+      }, [dellIndicator]); 
+
+
     return (
         <div className='flex justify-center bg-slate-200 min-w-80 rounded-md p-2'>
             <div className="max-w-2xl min-w-80 space-y-1">
@@ -72,6 +79,12 @@ function EditClientPage() {
                     </CheckListItem>
 
                     <div className="flex space-x-2  justify-around py-5">
+                    <button className="bg-red-200 rounded-md p-2 text-lg w-36"
+                        onClick={() =>{
+                            deleteData('clientesdegusta', String(client.id));
+                            }}>
+                            Excluir cliente
+                        </button>
                         <button className="bg-blue-200 rounded-md p-2 text-lg w-36"
                         onClick={() =>{
                             updateClients( client.id, newClientData);
@@ -79,6 +92,9 @@ function EditClientPage() {
                             }}>
                             Salvar e Voltar
                         </button>
+
+
+
 
                     </div>
                 </ul>
