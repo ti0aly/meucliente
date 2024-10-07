@@ -9,35 +9,41 @@ import NewClient from './pages/NewClient'
 import EditClientPage from './pages/EditClientPage'
 
 function App() {
-  const getData = async (folder, clientId) => {
-    const docRef = doc(db, folder, String(clientId));
-    const docSnap = await getDoc(docRef);
-    return docSnap;
+  // const getDataServer = async (folder, clientId) => {
+  //   const docRef = doc(db, folder, String(clientId));
+  //   const docSnap = await getDoc(docRef);
+  //   return docSnap;
+  // }
+  const clientListArray = async () => {
+    const clientData = await receiveClientsServer('clientesdegusta');
+    console.log("clientData[0]: ", clientData[0])
+    console.log("clientData[0].clientObject: ", clientData[0].clientObject)
+    setClients(clientData[0].clients);
   }
+  
+  const [clients, setClients] = useState();
 
-  const setData = async (folder, clientId, clientObject) => {
-    const docRef = doc(db, folder, String(clientId));
+  window.onload = (clientListArray);
+  const setDataServer = async (folder, sellerId, clientObject) => {
+    const docRef = doc(db, folder, sellerId);
     try {
       await setDoc(docRef, clientObject);
-      setaddIndicator(true);
     } catch (error) {
       console.error("Error setting document:", error);
     }
   }
 
-  const deleteData = async (folder, clientId) => {
-    console.log("chamou delete data");
-    const docRef = doc(db, folder, clientId);
-    try {
-      await deleteDoc(docRef);
-      console.log(`Documento com ID ${clientId} foi apagado com sucesso!`);
-      setdellIndicator(true);
-    } catch (error) {
-      console.error("Erro ao apagar o documento: ", error);
-    }
-  }
-  
-  const receiveClients = async (folder) => {
+  // const dellDataServer = async (folder, clientId) => {
+  //   const docRef = doc(db, folder, clientId);
+  //   try {
+  //     await deleteDoc(docRef);
+  //     console.log(`Documento com ID ${clientId} foi apagado com sucesso!`);
+  //   } catch (error) {
+  //     console.error("Erro ao apagar o documento: ", error);
+  //   }
+  // }
+
+   const receiveClientsServer = async (folder) => {
     const clientsCollection = collection(db, folder);
     const clientsSnapshot = await getDocs(clientsCollection);
     const clientsList = clientsSnapshot.docs.map(doc => ({
@@ -46,39 +52,14 @@ function App() {
     }))
     return clientsList
   }
-  const clientListArray = async () => {
-    const clientData = await receiveClients('clientesdegusta');
-    setClients(clientData);
-  }
-  
-  const [clients, setClients] = useState([   
-    {
-    id: 0,
-    name: ". . .",
-    phone: 0,
-    data: "",
-    cidade: "",
-    convidados: 0,
-    isDataAvailable: false,
-    clientStatus: 0,
-    isContacted: false,
-    isBudgetSentToClient: false,
-    isBudgetResponded: false,
-    isContractCreated: false,
-    isContractSigned: false,
-    isDepositPaid: false,
-    isTotalContractAmountPaid: false,
-  }
-]);
 
-  window.onload = (clientListArray);
+
 
   const updateClients = (id, newClientData) => {
     setClients((prevClients) =>
       prevClients.map((client) =>
         client.id === id ? { ...client, ...newClientData } : client 
       )
-      
     );
   }
   const addClient = (newClientData) => {
@@ -86,17 +67,24 @@ function App() {
       ...prevClients,
       { ...newClientData } 
     ]);
+  };  
+
+  const dellClient = (id) => {
+    setClients((prevClients) =>
+      prevClients.filter((client) => client.id !== id)
+    );
   };
 
-
   useEffect(() => {
-    console.log("Clientes atualizados: ", clients);
+      if (clients !== undefined) {
+      setDataServer('clientesdegusta', 'alysson', {clients});
+      console.log("Clientes atualizados: ", {clients});
+    }
   }, [clients]);
 
-  const [dellIndicator, setdellIndicator] = useState(false);
-  const [addIndicator, setaddIndicator] = useState(false);
+
   return (
-    <ClientsContext.Provider value={{clients, updateClients, addClient, setData, getData, deleteData, dellIndicator, addIndicator}}>
+    <ClientsContext.Provider value={{clients, updateClients, addClient, dellClient}}>
       <Routes>
         <Route path="/meucliente/" element={<InitialPage />} />
         <Route path="/meucliente/client/" element={<ClientPage />} />

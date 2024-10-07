@@ -6,11 +6,9 @@ import ClientsContext from "../contexts/ClientsContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Check } from "lucide-react";
-import ReactInputMask from "react-input-mask";
-
 
 function NewClient() {
-    const {clients, updateClients, addClient, setData, deleteData, getData, addIndicator} = useContext(ClientsContext);
+    const {clients, updateClients, addClient} = useContext(ClientsContext);
     const navigate = useNavigate();
     const randomId = Math.floor(Math.random() * 9000000000) + 1000000000;
     
@@ -43,11 +41,6 @@ function NewClient() {
     const handleChangeDataAvailable = (event) => {
         setclientDataAvailable(!clientDataAvailable);
     }
-    useEffect(() => {
-        if (addIndicator) {
-          navigate(-1);
-        }
-      }, [addIndicator]); 
 
     let newClient = {
         id: randomId,
@@ -75,25 +68,11 @@ function NewClient() {
                     <CheckListItem item="Nome:">
                         <input type="text" onChange={handleChangeName} className="w-60 rounded-md" id="clientName"></input>
                     </CheckListItem>
-                    <CheckListItem item="Celular:">
-                            <ReactInputMask
-                                className="w-60 rounded-md px-2" 
-                                id="clientPhone"
-                                onChange={handleChangePhone}
-                                mask="(99)99999-9999"
-                                placeholder="(XX)XXXXX-XXXX"
-                                required
-                            />
+                    <CheckListItem item="Celular:" >
+                        <input type="tel" id="clientPhone" className="w-60 rounded-md px-2"  onChange={handleChangePhone}/>
                     </CheckListItem>
                     <CheckListItem item="Data:">
-                        <ReactInputMask
-                            onChange={handleChangeDate} 
-                            className="w-60 rounded-md px-2" 
-                            id="clientDate"
-                            mask="99/99/9999"
-                            placeholder="XX/XX/XXXX"
-                            required
-                        />
+                        <input type="date" placeholder="dd/mm/yyyy" onChange={handleChangeDate} className="w-60 rounded-md px-2" id="clientDate"/>
                     </CheckListItem>
                     <CheckListItem item="Cidade:">
                         <input type="text" onChange={handleChangeCity} className="w-60 rounded-md" id="clientCity"></input>
@@ -122,13 +101,12 @@ function NewClient() {
                             if (clientName === "") {
                                 alert("Não é possível criar um cliente sem nome, crie ao menos uma referência.")
                             } else {
-                            //addClient(newClient);
-                            console.log("type of newClient: ", typeof newClient);
-                            console.log("newClient: ", newClient);
-                            setData("clientesdegusta", randomId, newClient);
-                            //navigate(-1);
+                            addClient(newClient);
+                            navigate(`/meucliente/client?id=${String(newClient.id)}`);
+                          };
+                            
                             }
-                            }}>
+                            }>
                             Salvar
                         </button>
 

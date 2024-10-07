@@ -28,7 +28,7 @@ function ClientView() {
                             navigate(`./client?${query.toString()}`);
                         }}
                         >
-                        <p className="flex justify-center">{(client.name).split(" ")[0] }<p>{client.data !== "" && ' (' + client.data + ')' || ""}</p>    </p>
+                        <div className="flex justify-center">{client.name }<p>{client.data !== "" && ' (' + client.data + ')' || ""}</p>    </div>
                         <p className="text-slate-400">{status[client.clientStatus]}</p>
                     </button>
                 </li>

@@ -5,7 +5,6 @@ import Title from "../components/Title";
 import CheckList from "../components/CheckList";
 import ClientsContext from "../contexts/ClientsContext";
 
-
 function ClientPage() {
     const {clients, updateClients} = useContext(ClientsContext);
     const status = [
@@ -20,9 +19,7 @@ function ClientPage() {
     const navigate = useNavigate();
     const [params] = useSearchParams();
     const clientId = params.get('id');
-    
     const client = clients.find(client => client.id === Number(clientId));
-    console.log(client);
     const mensagens = [
         `Olá ${(client.name).split(" ")[0]}, aqui é o Alysson da banda DEGUSTASOM, tudo bem? Entro em contato pela solicitação de orçamento recebida.\n\nVerifiquei sua data ${client.data !== "" && client.data || "" } e ainda está disponível, gostaria de confirmar contigo a cidade e o número aproximado de convidados que estão calculando, para poder te passar valores.`,
         `Olá ${client.name}, segue o orçamento solicitado.`,
@@ -31,6 +28,7 @@ function ClientPage() {
     return (
         <div className="flex justify-center">
             <div className="bg-slate-200 min-w-80 max-w-lg text-center  rounded-md flex-row space-y-3 p-2 h-screen ">
+                
                 <Title>
                     {client.name}
                 </Title>
@@ -38,7 +36,7 @@ function ClientPage() {
                     Status: {status[client.clientStatus]}
                 </p>
                 <button
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate(`/meucliente`)}
                     className="absolute left-0 top-0 bottom-0 text-lg">
                     <ChevronLeftIcon />
                 </button>

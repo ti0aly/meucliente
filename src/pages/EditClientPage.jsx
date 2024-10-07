@@ -10,7 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 function EditClientPage() {
     const [params] = useSearchParams();
     const clientId = params.get('id');
-    const {clients, updateClients, addClient, deleteData, dellIndicator} = useContext(ClientsContext);
+    const {clients, updateClients, dellClient, updateClientsFromOtherPages} = useContext(ClientsContext);
     const client = clients.find(client => client.id === Number(clientId));
     const navigate = useNavigate();
     
@@ -49,13 +49,6 @@ function EditClientPage() {
         convidados: clientGuests,
     };
 
-    useEffect(() => {
-        if (dellIndicator) {
-          navigate(-2)
-        }
-      }, [dellIndicator]); 
-
-
     return (
         <div className="flex justify-center">
         <div className="bg-slate-200 min-w-80 max-w-lg text-center  rounded-md flex-row space-y-3 p-2 h-screen ">
@@ -82,7 +75,8 @@ function EditClientPage() {
                     <div className="flex space-x-2  justify-around py-5">
                         <button className="bg-red-200 rounded-md p-2 text-lg w-36"
                         onClick={() =>{
-                            deleteData('clientesdegusta', String(client.id));
+                            dellClient(client.id);
+                            navigate(`/meucliente`)
                             }}>
                             Excluir cliente
                         </button>
@@ -90,7 +84,7 @@ function EditClientPage() {
                         <button className="bg-blue-200 rounded-md p-2 text-lg w-36"
                         onClick={() =>{
                             updateClients( client.id, newClientData);
-                            navigate(-2);
+                            navigate(`/meucliente`)
                             }}>
                             Salvar e Voltar
                         </button>
