@@ -1,59 +1,43 @@
 import { useState, useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { doc, getDoc, setDoc, getDocs, collection, deleteDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from './firebase-config'
 import ClientsContext from './contexts/ClientsContext'
-import ClientPage from './pages/ClientPage'
-import InitialPage from './pages/InitialPage'
-import NewClient from './pages/NewClient'
-import EditClientPage from './pages/EditClientPage'
+import ClientRoutes from './components/ClientRoutes'
 
 function App() {
-  // const getDataServer = async (folder, clientId) => {
-  //   const docRef = doc(db, folder, String(clientId));
-  //   const docSnap = await getDoc(docRef);
-  //   return docSnap;
-  // }
-  const clientListArray = async () => {
-    const clientData = await receiveClientsServer('clientesdegusta');
-    console.log("clientData[0]: ", clientData[0])
-    console.log("clientData[0].clientObject: ", clientData[0].clientObject)
-    setClients(clientData[0].clients);
+  const [userData, setUserData] = useState();
+
+  const setThisUserData = (userData) => {
+    setUserData(userData);
+  };
+
+  const getClientListArray = async () => {
+    console.log("userData.uid", userData.uid);
+    const clientData = await receiveClientsServer("clientesdegusta", userData.uid);
+    console.log("clientData: ", clientData);
+    setClients(clientData);
   }
-  
+
   const [clients, setClients] = useState();
 
-  window.onload = (clientListArray);
   const setDataServer = async (folder, sellerId, clientObject) => {
     const docRef = doc(db, folder, sellerId);
     try {
-      await setDoc(docRef, clientObject);
+      await setDoc(docRef, {clientObject}, { merge: true });
     } catch (error) {
       console.error("Error setting document:", error);
     }
   }
 
-  // const dellDataServer = async (folder, clientId) => {
-  //   const docRef = doc(db, folder, clientId);
-  //   try {
-  //     await deleteDoc(docRef);
-  //     console.log(`Documento com ID ${clientId} foi apagado com sucesso!`);
-  //   } catch (error) {
-  //     console.error("Erro ao apagar o documento: ", error);
-  //   }
-  // }
+    const receiveClientsServer = async (folder, documentId) => {
+    const docRef = doc(db, folder, documentId);
+    const docSnapshot = await getDoc(docRef);
+    console.log("docSnapshot: ", docSnapshot);
+    const data = docSnapshot.data();
+    console.log("data: ", data);
 
-   const receiveClientsServer = async (folder) => {
-    const clientsCollection = collection(db, folder);
-    const clientsSnapshot = await getDocs(clientsCollection);
-    const clientsList = clientsSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }))
-    return clientsList
+    return data
   }
-
-
 
   const updateClients = (id, newClientData) => {
     setClients((prevClients) =>
@@ -62,12 +46,19 @@ function App() {
       )
     );
   }
-  const addClient = (newClientData) => {
-    setClients((prevClients) => [
-      ...prevClients,
-      { ...newClientData } 
-    ]);
-  };  
+
+  const addClient = (newClientData) => { 
+    setClients((prevClients) => {
+      console.log("prevClients", prevClients);
+      console.log("newClientData", newClientData);
+      // Check if prevClients is empty
+      if (prevClients === undefined) {
+        return [{ ...newClientData }];
+      } else {
+        return [...prevClients, { ...newClientData }];
+      }
+    });
+  };
 
   const dellClient = (id) => {
     setClients((prevClients) =>
@@ -77,20 +68,25 @@ function App() {
 
   useEffect(() => {
       if (clients !== undefined) {
-      setDataServer('clientesdegusta', 'alysson', {clients});
-      console.log("Clientes atualizados: ", {clients});
+      setDataServer('clientesdegusta', userData.uid, clients);
+      console.log("Clientes atualizados: ", clients);
     }
   }, [clients]);
-
+  
+  useEffect(() => {
+    console.log("userData, in App.jsx: ", userData);
+    if (userData !== undefined) {
+      getClientListArray();
+      console.log("userData.email: ", userData.email);
+      console.log("userData.displayName: ", userData.displayName);
+      console.log("userData.uid: ", userData.uid);
+      console.log("userData.photoURL: ", userData.photoURL);
+    }
+  }, [userData]);
 
   return (
-    <ClientsContext.Provider value={{clients, updateClients, addClient, dellClient}}>
-      <Routes>
-        <Route path="/meucliente/" element={<InitialPage />} />
-        <Route path="/meucliente/client/" element={<ClientPage />} />
-        <Route path="/meucliente/newclient/" element={<NewClient />}/>
-        <Route path="/meucliente/editclient/" element={<EditClientPage />}/>
-      </Routes>
+    <ClientsContext.Provider value={{clients, userData, updateClients, addClient, dellClient, setThisUserData}}>
+      <ClientRoutes/>
     </ClientsContext.Provider>
   )
 }

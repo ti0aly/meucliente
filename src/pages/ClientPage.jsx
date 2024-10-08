@@ -6,7 +6,7 @@ import CheckList from "../components/CheckList";
 import ClientsContext from "../contexts/ClientsContext";
 
 function ClientPage() {
-    const {clients, updateClients} = useContext(ClientsContext);
+    const { clients } = useContext(ClientsContext);
     const status = [
         "Fazer primeiro contato", 
         "Enviar orçamento", 
@@ -36,7 +36,7 @@ function ClientPage() {
                     Status: {status[client.clientStatus]}
                 </p>
                 <button
-                    onClick={() => navigate(`/meucliente`)}
+                    onClick={() => navigate(`/meucliente/`)}
                     className="absolute left-0 top-0 bottom-0 text-lg">
                     <ChevronLeftIcon />
                 </button>

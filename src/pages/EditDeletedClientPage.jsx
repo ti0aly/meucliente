@@ -3,20 +3,17 @@ import Title from "../components/Title";
 import Subtitle from "../components/Subtitle";
 import CheckListItem from "../components/CheckListItem";
 import ClientsContext from "../contexts/ClientsContext";
-import { useContext, useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { ChevronLeftIcon } from "lucide-react";
+import { useContext, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 
-function EditClientPage() {
+function EditDeletedClientPage() {
     const [params] = useSearchParams();
     const clientId = params.get('id');
-    const {clients, updateClients, dellClient, updateClientsFromOtherPages} = useContext(ClientsContext);
+    const {clients, updateClients, dellClient} = useContext(ClientsContext);
     const client = clients.find(client => client.id === Number(clientId));
     const navigate = useNavigate();
-    
-
-
     const [clientName, setClientName] = useState(client.name);
     const handleChangeName = (event) => {
         setClientName(event.target.value);
@@ -41,14 +38,6 @@ function EditClientPage() {
     const handleChangeGuests = (event) => {
         setclientGuests(event.target.value);
     }
-
-    let newClientData = {
-        name: clientName,
-        phone: clientPhone,
-        data: clientDate,
-        cidade: clientCity,
-        convidados: clientGuests,
-    };
 
     return (
         <div className="flex justify-center">
@@ -84,19 +73,23 @@ function EditClientPage() {
                             const setDel = {
                                 isDeleted: true,
                             }
-                            updateClients(client.id, setDel);
-                            navigate(`/meucliente/`)
+                            dellClient(client.id);
+                            navigate(`/meucliente/recicle`)
                             }}>
-                            Excluir cliente
+                            Excluir Definitivamente
                         </button>
 
                         <button className="bg-blue-200 rounded-md p-2 text-lg w-36"
                         onClick={() =>{
-                            updateClients( client.id, newClientData);
+                            const setNonDeleted = {
+                                isDeleted: false,
+                            }
+                            updateClients( client.id, setNonDeleted);
                             navigate(`/meucliente`)
                             }}>
-                            Salvar e Voltar
+                            Restaurar
                         </button>
+
 
 
 
@@ -110,4 +103,4 @@ function EditClientPage() {
 }
 
 
-export default EditClientPage;
+export default EditDeletedClientPage;

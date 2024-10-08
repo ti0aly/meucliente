@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { X, Check } from "lucide-react";
 
 function NewClient() {
-    const {clients, updateClients, addClient} = useContext(ClientsContext);
+    const { addClient } = useContext(ClientsContext);
     const navigate = useNavigate();
     const randomId = Math.floor(Math.random() * 9000000000) + 1000000000;
     
@@ -58,6 +58,7 @@ function NewClient() {
         isContractSigned: false,
         isDepositPaid: false,
         isTotalContractAmountPaid: false,
+        isDeleted: false,
     }
     return (
         <div className='flex justify-center bg-slate-200 min-w-80 p-1 h-screen text-center'>
