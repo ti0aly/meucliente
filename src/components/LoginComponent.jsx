@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { auth, provider, signInWithPopup, signOut } from '../firebase-config';
+import { auth, provider, signInWithPopup, signOut, onAuthStateChanged } from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
 import ClientsContext from '../contexts/ClientsContext';
 
-
 function LoginComponent() {
-    const { setThisUserData, userData } = useContext(ClientsContext);
+    // user in case new connections
+    // userData in case browserLocalPersistence
+
+    const { setThisUserData, userData, setUserData } = useContext(ClientsContext);
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     
@@ -27,12 +29,30 @@ function LoginComponent() {
         console.error("Error during sign out", error);
         }
     };
+    
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (userData) => {
+        if (userData) {
+            setUserData(userData);
+            setThisUserData(userData);
+        } else {
+            setUserData(null);
+            console.log('Nenhum usuário logado');
+        }
+        });
+        return () => unsubscribe();
+    }, [auth]);
+
+
+
+
+
 
     return (
         <div >
-        {user ? (
+        {user || userData ? (
             <div >
-            <h3>Welcome, {user.displayName}</h3>
+            { <h3>Welcome, {user !== null && user.displayName || userData.displayName}</h3> }
             <button
                 className="flex-wrap items-center justify-center mt-8 px-4 py-2 text-gray-800 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
                 onClick={handleSignOut}

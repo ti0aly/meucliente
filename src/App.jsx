@@ -27,10 +27,9 @@ function App() {
 
   const setDataServer = async (folder, sellerId, clientObject) => {
     const docRef = doc(db, folder, sellerId);
-    console.log("clientObject", {clientObject});
     try {
 
-      await setDoc(docRef, {clientObject});
+      await setDoc(docRef, {clientObject}, { merge: true });
     } catch (error) {
       console.error("Error setting document:", error);
     }
@@ -40,8 +39,6 @@ function App() {
     const docRef = doc(db, folder, documentId);
     const docSnapshot = await getDoc(docRef);
     const data = docSnapshot.data();
-    console.log("data in receiveClientsServer: ", data);
-
     return data
   }
 
@@ -73,27 +70,28 @@ function App() {
     
   };
 
-  useEffect(() => {
-      if (clients !== undefined) {
-      console.log("Clientes atualizados: ", clients);
-    }
-  }, [clients]);
+  // useEffect(() => {
+  //     if (clients !== undefined) {
+  //     console.log("Clients updated: ", clients);
+  //   }
+  // }, [clients]);
 
-  useEffect(() => {
-    if (userData !== undefined) {
-    console.log("userData: ", userData);
-    }
-}, [userData]);
+//   useEffect(() => {
+//     if (userData !== undefined) {
+//     console.log("userData: ", userData);
+//     }
+// }, [userData]);
 
   useEffect(() => {
     if(flagUpdateServer > 0){
         setDataServer('clientesdegusta', userData.uid, clients);
-        console.log("clients: ", clients);
-        console.log("userData.uid: ", userData.uid);}
+        // console.log("clients: ", clients);
+        // console.log("userData.uid: ", userData.uid);
+        }
   }, [flagUpdateServer]);
   
   return (
-    <ClientsContext.Provider value={{clients, userData, updateClients, addClient, dellClient, setThisUserData}}>
+    <ClientsContext.Provider value={{clients, userData, updateClients, addClient, dellClient, setThisUserData, setUserData}}>
       <ClientRoutes/>
     </ClientsContext.Provider>
   )
