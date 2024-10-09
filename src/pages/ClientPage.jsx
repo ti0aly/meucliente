@@ -36,7 +36,7 @@ function ClientPage() {
                     Status: {status[client.clientStatus]}
                 </p>
                 <button
-                    onClick={() => navigate(`/meucliente/`)}
+                    onClick={() => navigate(`/meucliente/initial/`)}
                     className="absolute left-0 top-0 bottom-0 text-lg">
                     <ChevronLeftIcon />
                 </button>

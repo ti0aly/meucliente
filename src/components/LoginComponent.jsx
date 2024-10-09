@@ -5,7 +5,7 @@ import ClientsContext from '../contexts/ClientsContext';
 
 
 function LoginComponent() {
-    const { setThisUserData } = useContext(ClientsContext);
+    const { setThisUserData, userData } = useContext(ClientsContext);
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     
@@ -41,7 +41,7 @@ function LoginComponent() {
             </button>
             <button
                 className="flex-wrap items-center justify-center mt-8 px-4 py-2 text-gray-800 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
-                onClick={() => navigate('/meucliente/')}
+                onClick={() => navigate('/meucliente/initial/')}
                 >
                     Ir para meus clientes
             </button>
@@ -54,7 +54,7 @@ function LoginComponent() {
                     className="flex items-center justify-center mt-8 px-4 py-2 text-gray-800 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150"
                     onClick={loginWithGoogle}
                     >
-                        <img src="../images/google-icon.svg" className='w-5 h-5 mr-2 '/>
+                        <img src="/meucliente/images/google-icon.svg" className='w-5 h-5 mr-2 '/>
                         Login with Google
                 </button>
                 

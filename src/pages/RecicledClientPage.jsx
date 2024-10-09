@@ -12,14 +12,14 @@ function RecicledClientPage() {
                 <Title>Meu cliente</Title>
                 <Subtitle>Clientes excluídos:</Subtitle>
                 <button
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate('/meucliente/initial/')}
                     className="absolute left-0 top-0 bottom-0 text-lg">
                     <ChevronLeftIcon />
                 </button>
                 <DeletedClientView></DeletedClientView>
                 <button className="bg-blue-200 rounded-md p-2 text-lg w-36"
                     onClick={() =>{
-                        navigate(`/meucliente`)
+                        navigate(`/meucliente/initial/`)
                         }}>
                         Voltar
                 </button>

@@ -93,7 +93,7 @@ function NewClient() {
                     <div className="flex space-x-2 justify-around py-5">
                         <button className="bg-red-200 rounded-md p-1 text-lg w-28"
                         onClick={() =>{
-                            navigate(-1);
+                            navigate('/meucliente/initial/');
                             }}>
                             Voltar
                         </button>

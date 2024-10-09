@@ -46,7 +46,7 @@ function EditDeletedClientPage() {
                 <Title>Editar Cliente</Title>
                 <Subtitle>{client.name}</Subtitle>
                 <button
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate('/meucliente/recicle/')}
                     className="absolute left-0 top-0 bottom-0 text-lg">
                     <ChevronLeftIcon />
                 </button>
@@ -85,7 +85,7 @@ function EditDeletedClientPage() {
                                 isDeleted: false,
                             }
                             updateClients( client.id, setNonDeleted);
-                            navigate(`/meucliente`)
+                            navigate(`/meucliente/initial/`)
                             }}>
                             Restaurar
                         </button>

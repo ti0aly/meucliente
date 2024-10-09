@@ -10,13 +10,13 @@ import LoginPage from "../pages/LoginPage";
 function ClientRoutes () {
     return (
         <Routes>
-            <Route path="/meucliente/" element={<InitialPage />} />
+            <Route path="/meucliente/initial/" element={<InitialPage />} />
             <Route path="/meucliente/client/" element={<ClientPage />} />
             <Route path="/meucliente/newclient/" element={<NewClient />}/>
             <Route path="/meucliente/editclient/" element={<EditClientPage />}/>
             <Route path="/meucliente/editdeletedclient/" element={<EditDeletedClientPage />}/>
             <Route path="/meucliente/recicle/" element={<RecicledClientPage />}/>
-            <Route path="/meucliente/login/" element={ <LoginPage /> } />
+            <Route path="/meucliente/" element={ <LoginPage /> } />
         </Routes>
     )
 }

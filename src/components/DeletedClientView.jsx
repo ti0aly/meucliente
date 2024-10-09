@@ -14,12 +14,12 @@ function DeletedClientView() {
         "Venda finalizada"
       ];
     const {clients, updateClients} = useContext(ClientsContext);
-    const deletedClients = clients.filter((client) => client.isDeleted === true);
+
     return (
      <div className="bg-slate-300 rounded-md flex justify-evenly flex-wrap gap-2 p-2 text-lg space-x-2" >
-        
-        { deletedClients.length > 0 && deletedClients.map((client) => 
-            
+        { 
+            clients !== undefined &&
+            clients.filter((client) => client.isDeleted === true).map((client) =>
             <ul key={client.id}>
                 <li>
                     <button 
@@ -27,7 +27,7 @@ function DeletedClientView() {
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
-                            navigate(`../meucliente/editdeletedclient?${query.toString()}`);
+                            navigate(`/meucliente/editdeletedclient?${query.toString()}`);
                         }}
                         >
                         <div className="flex justify-center text-red-700">{client.name }<p>{client.data !== "" && ' (' + client.data + ')' || ""}</p>    </div>
@@ -36,7 +36,7 @@ function DeletedClientView() {
                 </li>
             </ul>
 
-        ) || <p className="text-gray-600">Você não tem clientes excluídos</p> }
+        ) || (<p className="text-gray-600">Você não tem clientes excluídos</p>) }
 
 
      </div>   

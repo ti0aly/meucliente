@@ -57,7 +57,7 @@ function EditClientPage() {
                 <Title>Editar Cliente</Title>
                 <Subtitle>{client.name}</Subtitle>
                 <button
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate("/meucliente/initial/")}
                     className="absolute left-0 top-0 bottom-0 text-lg">
                     <ChevronLeftIcon />
                 </button>
@@ -85,7 +85,7 @@ function EditClientPage() {
                                 isDeleted: true,
                             }
                             updateClients(client.id, setDel);
-                            navigate(`/meucliente/`)
+                            navigate(`/meucliente/initial/`);
                             }}>
                             Excluir cliente
                         </button>
@@ -93,7 +93,7 @@ function EditClientPage() {
                         <button className="bg-blue-200 rounded-md p-2 text-lg w-36"
                         onClick={() =>{
                             updateClients( client.id, newClientData);
-                            navigate(`/meucliente`)
+                            navigate(`/meucliente/initial/`);
                             }}>
                             Salvar e Voltar
                         </button>

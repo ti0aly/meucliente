@@ -14,7 +14,6 @@ function ClientView() {
         "Venda finalizada"
       ];
     const {clients} = useContext(ClientsContext);
-    const activeClients = clients.filter((client) => client.isDeleted === false);
     
     return (
      <div className="bg-slate-300 rounded-md flex justify-evenly flex-wrap gap-2 p-2 text-lg" >
@@ -22,7 +21,7 @@ function ClientView() {
         { 
         clients !== undefined &&
         
-        activeClients.map((client) => 
+        clients.filter((client) => client.isDeleted === false).map((client) => 
         
             <ul key={client.id}>
                 <li>
@@ -31,7 +30,7 @@ function ClientView() {
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
-                            navigate(`./client?${query.toString()}`);
+                            navigate(`/meucliente/client?${query.toString()}`);
                         }}
                         >
                         <div className="flex justify-center">{client.name }<p>{client.data !== "" && ' (' + client.data + ')' || ""}</p>    </div>
