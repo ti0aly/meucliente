@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { auth, provider, signInWithPopup, signOut, onAuthStateChanged } from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
 import ClientsContext from '../contexts/ClientsContext';
+import Subtitle from './Subtitle';
 
 function LoginComponent() {
     // user in case new connections
@@ -51,20 +52,25 @@ function LoginComponent() {
     return (
         <div >
         {user || userData ? (
-            <div >
-            { <h3>Welcome, {user !== null && user.displayName || userData.displayName}</h3> }
+            <div className='flex flex-col space-y-3 items-center'>
+                <h3  className='flex-wrap items-center justify-center px-4 py-2  text-gray-800  border border-gray-300 rounded-full shadow hover:bg-gray-100 transition duration-150 font-semibold'> 
+                {user !== null && user.displayName || userData.displayName}
+                </h3>
+            { <h3></h3> }
+            { <img className='rounded-full max-w-24' src={user !== null && user.photoURL || userData.photoURL} alt="" /> }
             <button
-                className="flex-wrap items-center justify-center mt-8 px-4 py-2 text-gray-800 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
-                onClick={handleSignOut}
-                >
-                    Sign Out
-            </button>
-            <button
-                className="flex-wrap items-center justify-center mt-8 px-4 py-2 text-gray-800 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
+                className="flex-wrap items-center justify-center px-4 py-2 min-w-48 text-gray-800 bg-blue-200 border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
                 onClick={() => navigate('/meucliente/initial/')}
                 >
                     Ir para meus clientes
             </button>
+            <button
+                className="flex-wrap items-center justify-center px-4 py-2 min-w-48 text-gray-800 bg-slate-200 border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
+                onClick={handleSignOut}
+                >
+                    Sign Out
+            </button>
+
 
             
             </div >

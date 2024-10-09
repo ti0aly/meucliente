@@ -7,7 +7,7 @@ import { ChevronLeftIcon } from "lucide-react";
 function RecicledClientPage() {
     const navigate = useNavigate();
     return (
-        <div className='flex justify-center bg-slate-200 min-w-80 text-center h-screen'>
+        <div className='flex justify-center bg-slate-200 min-w-80 text-center p-2'>
             <div className="max-w-2xl min-w-80 space-y-1">
                 <Title>Meu cliente</Title>
                 <Subtitle>Clientes excluídos:</Subtitle>

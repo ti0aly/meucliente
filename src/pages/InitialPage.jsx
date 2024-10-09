@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ClientsContext from "../contexts/ClientsContext";
 import LoginComponent from "../components/LoginComponent";
 import { auth, onAuthStateChanged, signOut } from "../firebase-config";
+import { Trash2, LogOut, UserPlus } from "lucide-react";
 
 function InitialPage() {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ function InitialPage() {
 
     return (
         <div className='flex justify-center bg-slate-200 min-w-80 text-center h-screen'>
-            <div className="max-w-2xl min-w-80 space-y-2 space-x-2">
+            <div className="max-w-2xl min-w-80 space-y-2 ">
                 <Title>Meu cliente</Title>
                 
                 <Subtitle>
@@ -60,18 +61,27 @@ function InitialPage() {
                 {userData !== undefined
                 ? (<>
                     <ClientView></ClientView>
-                        <button className="bg-blue-200 rounded-md p-2 text-xl" onClick={() =>{ navigate('/meucliente/newclient/')}}>
-                        Adicionar cliente
-                    </button>
-                    <button className="bg-red-100 rounded-md p-2 text-xl" onClick={() =>{ navigate('/meucliente/recicle/')}}>
-                        Clientes excluídos
-                    </button>
-                    <button 
-                        className="bg-red-100 rounded-md p-2 text-xl" 
-                        onClick={ logoutFunction }
-                        >
-                        Logout
-                    </button>
+                    <div className="flex flex-wrap justify-evenly">
+                        <button 
+                            className="flex text-gray-800 p-3 bg-blue-200 border border-bl-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" onClick={() =>{ navigate('/meucliente/newclient/')}}
+                            title="add client"
+                            >
+                            <UserPlus />Add Client
+                        </button>
+                        <button 
+                            className="flex text-gray-800 p-3 bg-slate-200 border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" onClick={() =>{ navigate('/meucliente/recicle/')}}
+                            title="recicle"
+                            >
+                        <Trash2 />Excluídos
+                        </button>
+                        <button 
+                            className="flex text-gray-800 p-3 bg-red-200 border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
+                            onClick={ logoutFunction }
+                            title="sign out"
+                            >
+                            <LogOut />Sign Out
+                        </button>
+                    </div>
                 </>)
                 : <LoginComponent></LoginComponent>}
             </div>
