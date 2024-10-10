@@ -43,7 +43,7 @@ function EditDeletedClientPage() {
         <div className="flex justify-center">
         <div className="bg-slate-200 min-w-80 max-w-lg text-center  rounded-md flex-row space-y-3 p-2 h-screen ">
             <div className="max-w-2xl min-w-80 space-y-1">
-                <Title>Editar Cliente</Title>
+                <Title  className='max-w-80 overflow-hidden'>Editar Cliente</Title>
                 <Subtitle>{client.name}</Subtitle>
                 <button
                     onClick={() => navigate('/meucliente/recicle/')}

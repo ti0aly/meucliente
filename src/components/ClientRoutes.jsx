@@ -6,6 +6,7 @@ import EditClientPage from "../pages/EditClientPage";
 import EditDeletedClientPage from "../pages/EditDeletedClientPage";
 import RecicledClientPage from "../pages/RecicledClientPage";
 import LoginPage from "../pages/LoginPage";
+import UserMessages from "../pages/UserMessages";
 
 function ClientRoutes () {
     return (
@@ -16,6 +17,7 @@ function ClientRoutes () {
             <Route path="/meucliente/editclient/" element={<EditClientPage />}/>
             <Route path="/meucliente/editdeletedclient/" element={<EditDeletedClientPage />}/>
             <Route path="/meucliente/recicle/" element={<RecicledClientPage />}/>
+            <Route path="/meucliente/usermessages/" element={<UserMessages />} ></Route>
             <Route path="/meucliente/" element={ <LoginPage /> } />
         </Routes>
     )

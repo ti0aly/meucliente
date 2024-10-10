@@ -57,7 +57,7 @@ function EditClientPage() {
                 <Title>Editar Cliente</Title>
                 <Subtitle>{client.name}</Subtitle>
                 <button
-                    onClick={() => navigate("/meucliente/initial/")}
+                    onClick={() => navigate(-1)}
                     className="absolute left-0 top-0 bottom-0 text-lg">
                     <ChevronLeftIcon />
                 </button>

@@ -1,5 +1,5 @@
 function Title(props) {
-    return <h1 className="text-4xl flex justify-center">
+    return <h1 className="text-4xl flex justify-center overflow-hidden">
         {props.children}
         </h1>
 }

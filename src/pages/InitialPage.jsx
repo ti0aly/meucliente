@@ -47,7 +47,7 @@ function InitialPage() {
 
     return (
         <div className='flex justify-center bg-slate-200 min-w-80 text-center h-screen'>
-            <div className="max-w-2xl min-w-80 space-y-2 ">
+            <div className="max-w-xl min-w-80 space-y-2 ">
                 <Title>Meu cliente</Title>
                 
                 <Subtitle>
