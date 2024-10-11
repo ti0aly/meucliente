@@ -6,26 +6,44 @@ import ClientRoutes from './components/ClientRoutes'
 
 function App() {
   const [userData, setUserData] = useState();
+  const [userCustomData, setUserCustomData] = useState();
+  const [userName, setUserName] = useState();
+
   const [flagUpdateServer, setFlagUpdateServer] = useState(0);
-
-  const setThisUserData = (userData) => {
-    setUserData(userData);
-    getClientListArray(userData);
-    // setTimeout(() => getClientListArray(userData), 2000);
-  };
-
   const callUpdateByIncreaseFlag = () => {
     setFlagUpdateServer(prevFlag => prevFlag + 1);
   }
 
-  const getClientListArray = async (userDataReceived) => {
-    const clientData = await receiveClientsServer("clientesdegusta", userDataReceived.uid);
+  const setThisUserData = (userData) => {
+    setUserData(userData);
+    // get all user clients  
+    getClientListArray("clientesdegusta", userData);
+    // get user data
+    getUserData("usersdegusta", userData);
+  };
+
+  // collection string
+  const getClientListArray = async (collection, userDataReceived) => {
+    const clientData = await receiveClientsServer(collection, userDataReceived.uid);
     setClients(clientData.clientObject);
   }
-  
+
+  const getUserData = async (collection, userDataReceived) => {
+    const userData = await receiveClientsServer(collection, userDataReceived.uid);
+    if (userData !== undefined) {
+      const objectCustom = userData.clientObject;
+      console.log("objectCustom in getUserData: ", objectCustom);
+      console.log("objectCustom.customName in getUserData: ", objectCustom.customName);
+      setUserName(objectCustom.customName);
+    }
+
+
+  }
+
   const [clients, setClients] = useState();
 
   const setDataServer = async (folder, sellerId, clientObject) => {
+    console.log("interagiu com o servidor! ", clientObject)
     const docRef = doc(db, folder, sellerId);
     try {
 
@@ -67,8 +85,17 @@ function App() {
       prevClients.filter((client) => client.id !== id)
     );
     callUpdateByIncreaseFlag();
-    
   };
+
+  const handleChangeCustomUserName = () => {
+    const newName = prompt("Insira o novo nome para compor as suas mensagens: ");
+    console.log(newName);
+    if (newName !== undefined && newName !== null && newName.length > 1) {
+      setDataServer('usersdegusta', userData.uid, {customName: newName});
+      setUserName(newName);
+    } 
+    // setDataServer('usersdegusta', userData.uid, userCustomData);
+  }
 
   // useEffect(() => {
   //     if (clients !== undefined) {
@@ -83,15 +110,27 @@ function App() {
 // }, [userData]);
 
   useEffect(() => {
-    if(flagUpdateServer > 0){
+    if (userCustomData !== undefined) {
+      console.log("userCustomData in useEffect: ", userCustomData);
+      console.log("userCustomData.customName in useEffect: ", userCustomData.customName);
+    }
+}, [userCustomData]);
+
+  useEffect(() => {
+    if(flagUpdateServer > 0) {
         setDataServer('clientesdegusta', userData.uid, clients);
         // console.log("clients: ", clients);
         // console.log("userData.uid: ", userData.uid);
         }
   }, [flagUpdateServer]);
+
+
+    
+
   
+
   return (
-    <ClientsContext.Provider value={{clients, userData, updateClients, addClient, dellClient, setThisUserData, setUserData}}>
+    <ClientsContext.Provider value={{clients, userName, userData, updateClients, addClient, dellClient, setThisUserData, setUserData, handleChangeCustomUserName}}>
       <ClientRoutes/>
     </ClientsContext.Provider>
   )

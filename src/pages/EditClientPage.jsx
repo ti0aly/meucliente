@@ -5,7 +5,7 @@ import CheckListItem from "../components/CheckListItem";
 import ClientsContext from "../contexts/ClientsContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ChevronLeftIcon } from "lucide-react";
+import { UserX, Save, Undo2 } from "lucide-react";
 
 
 function EditClientPage() {
@@ -56,11 +56,6 @@ function EditClientPage() {
             <div className="max-w-2xl min-w-80 space-y-1">
                 <Title>Editar Cliente</Title>
                 <Subtitle>{client.name}</Subtitle>
-                <button
-                    onClick={() => navigate(-1)}
-                    className="absolute left-0 top-0 bottom-0 text-lg">
-                    <ChevronLeftIcon />
-                </button>
                 <ul className="space-y-1">
                     <CheckListItem item="Nome:">
                         <input type="text" onChange={handleChangeName} className="w-60 rounded-md pr-2 text-right" id="clientName" placeholder={client.name}></input>
@@ -77,9 +72,10 @@ function EditClientPage() {
                     <CheckListItem item="Nº de convidados:">
                         <input type="text" onChange={handleChangeGuests} className="w-40 rounded-md pr-2 text-right" id="clientGuests" placeholder={client.convidados}></input>
                     </CheckListItem>
-
-                    <div className="flex space-x-2  justify-around py-5">
-                        <button className="bg-red-200 rounded-md p-2 text-lg w-36"
+                </ul>
+                    <div className="flex flex-wrap justify-around items-center align-middle space-x-2 space-y-2 max-w-96 py-5">
+                        <button 
+                        className="flex justify-center p-1 text-gray-800 w-40 bg-red-300 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150"
                         onClick={() =>{
                             const setDel = {
                                 isDeleted: true,
@@ -87,22 +83,30 @@ function EditClientPage() {
                             updateClients(client.id, setDel);
                             navigate(`/meucliente/initial/`);
                             }}>
-                            Excluir cliente
+                            <UserX />Excluir
                         </button>
 
-                        <button className="bg-blue-200 rounded-md p-2 text-lg w-36"
+                        <button 
+                        className="flex justify-center p-1 text-gray-800 w-40 bg-blue-200 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150"
                         onClick={() =>{
                             updateClients( client.id, newClientData);
                             navigate(`/meucliente/initial/`);
                             }}>
-                            Salvar e Voltar
+                            <Save />Salvar
+                        </button>
+                        <button 
+                            className="flex justify-center p-1 text-gray-800 w-40 bg-slate-100 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
+                            onClick={() =>{ navigate(-1)}}
+                            title="back"
+                            >
+                            <Undo2 />Voltar 
                         </button>
 
 
 
 
                     </div>
-                </ul>
+
             </div>
         </div>
         </div>

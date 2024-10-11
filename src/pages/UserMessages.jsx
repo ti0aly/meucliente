@@ -5,12 +5,12 @@ import MsgView from "../components/MsgView"
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ClientsContext from "../contexts/ClientsContext";
 import LoginComponent from "../components/LoginComponent";
-import { Undo2 } from "lucide-react";
+import { Undo2, Pencil } from "lucide-react";
 import WhatsappIcon from "../components/WhatsappIcon";
 
 function UserMessages() {
     const navigate = useNavigate();
-    const { userData, clients } = useContext(ClientsContext);
+    const { userData, clients, userName, handleChangeCustomUserName } = useContext(ClientsContext);
     const [params] = useSearchParams();
     const clientId = params.get('id');
     const client = clients.find(client => client.id === Number(clientId));
@@ -25,8 +25,15 @@ function UserMessages() {
                 {userData !== undefined && 
                 <>
                     <img className='w-6 h-6 rounded-full mr-1'  src={ userData !== undefined && userData.photoURL  || ""} alt="" />
-                    Mensagens de {userData.displayName}
+                    Seu nome:&nbsp; 
+                    <button
+                        onClick={handleChangeCustomUserName} 
+                        className="flex" >
+                        {userName !== undefined && userName || userData.displayName }
+                        <Pencil className="w-3"></Pencil>
+                    </button>
                 </> 
+
                 || "Você precisa estar logado."}
                 </Subtitle>
                 {userData !== undefined
