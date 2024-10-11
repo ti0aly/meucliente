@@ -6,11 +6,11 @@ import { useNavigate } from "react-router-dom";
 import ClientsContext from "../contexts/ClientsContext";
 import LoginComponent from "../components/LoginComponent";
 import { auth, onAuthStateChanged, signOut } from "../firebase-config";
-import { Trash2, LogOut, UserPlus } from "lucide-react";
+import { Trash2, LogOut, UserPlus, Pencil } from "lucide-react";
 
 function InitialPage() {
     const navigate = useNavigate();
-    const { userData, setUserData, setThisUserData} = useContext(ClientsContext);
+    const { userData, setUserData, setThisUserData, handleChangeCustomUserName, userName} = useContext(ClientsContext);
 
     // console.log("userData.email: ", userData.email);
     // console.log("userData.displayName: ", userData.displayName);
@@ -53,9 +53,15 @@ function InitialPage() {
                 <Subtitle>
                 {userData !== undefined && 
                 <>
-                    <img className='w-6 h-6 rounded-full mr-1'  src={ userData !== undefined && userData.photoURL  || ""} alt="" />
-                    Clientes de {userData.displayName}
-                </> 
+                <img className='w-6 h-6 rounded-full mr-1'  src={ userData !== undefined && userData.photoURL  || ""} alt="" />
+                Clientes de&nbsp; 
+                <button
+                    onClick={handleChangeCustomUserName} 
+                    className="flex" >
+                    {userName !== undefined && userName || userData.displayName }
+                    <Pencil className="w-3"></Pencil>
+                </button>
+            </> 
                 || "Você precisa estar logado."}
                 </Subtitle>
                 {userData !== undefined
