@@ -5,33 +5,27 @@ import ClientView from "../components/ClientView"
 import { useNavigate } from "react-router-dom";
 import ClientsContext from "../contexts/ClientsContext";
 import LoginComponent from "../components/LoginComponent";
+import ButtonMRED from "../components/ButtonMRED";
+import ButtonMGREEN from "../components/ButtonMGREEN";
+import ButtonMSLATE from "../components/ButtonMSLATE";
+import ButtonMBLUE from "../components/ButtonMBLUE";
 import { auth, onAuthStateChanged, signOut } from "../firebase-config";
-import { Trash2, LogOut, UserPlus, Pencil } from "lucide-react";
+import { Trash2, LogOut, UserPlus, Pencil, MessageCircleMore } from "lucide-react";
 
 function InitialPage() {
     const navigate = useNavigate();
     const { userData, setUserData, setThisUserData, handleChangeCustomUserName, userName} = useContext(ClientsContext);
 
-    // console.log("userData.email: ", userData.email);
-    // console.log("userData.displayName: ", userData.displayName);
-    // console.log("userData.uid: ", userData.uid);
-    // console.log("userData.photoURL: ", userData.photoURL);
-
     useEffect(() => {
-        // Verifica se há um usuário logado quando o app carrega ou a página é atualizada
         const unsubscribe = onAuthStateChanged(auth, (userData) => {
         if (userData) {
-            // Usuário está autenticado, salva os dados do usuário
             setUserData(userData);
             setThisUserData(userData);
         } else {
-            // Usuário não está autenticado
             setUserData(null);
             console.log('Nenhum usuário logado');
         }
         });
-
-        // Cleanup para remover o listener
         return () => unsubscribe();
     }, [auth]);
 
@@ -41,9 +35,6 @@ function InitialPage() {
         setThisUserData(null);
         navigate('/meucliente/');
     }
-
-
-
 
     return (
         <div className='flex justify-center bg-slate-200 min-w-80 text-center h-screen'>
@@ -67,26 +58,36 @@ function InitialPage() {
                 {userData !== undefined
                 ? (<>
                     <ClientView></ClientView>
-                    <div className="flex flex-wrap justify-evenly">
-                        <button 
-                            className="flex text-gray-800 p-3 bg-blue-200 border border-bl-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" onClick={() =>{ navigate('/meucliente/newclient/')}}
-                            title="add client"
-                            >
-                            <UserPlus />Add Client
-                        </button>
-                        <button 
-                            className="flex text-gray-800 p-3 bg-slate-200 border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" onClick={() =>{ navigate('/meucliente/recicle/')}}
-                            title="recicle"
-                            >
-                        <Trash2 />Excluídos
-                        </button>
-                        <button 
-                            className="flex text-gray-800 p-3 bg-red-200 border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
-                            onClick={ logoutFunction }
-                            title="sign out"
-                            >
-                            <LogOut />Sign Out
-                        </button>
+
+                    <div className="flex flex-col items-center space-y-3">
+                        <div className="flex flex-row justify-evenly max-w-96 space-x-2 ">
+                            <ButtonMBLUE
+                                onClick={() =>{ navigate('/meucliente/newclient/')}}
+                                title="add client"
+                                >
+                                <UserPlus />Adicionar
+                            </ButtonMBLUE>
+                            <ButtonMGREEN
+                                onClick={() =>{ navigate('/meucliente/editusermessages/')}}
+                                title="Messages"
+                                >
+                                <MessageCircleMore />Mensagens
+                            </ButtonMGREEN>
+                            </div>
+                            <div className="flex flex-row  justify-evenly max-w-96 space-x-2">
+                            <ButtonMSLATE
+                                onClick={() =>{ navigate('/meucliente/recicle/')}}
+                                title="recicle"
+                                >
+                            <Trash2 />Excluídos
+                            </ButtonMSLATE>
+                            <ButtonMRED
+                                onClick={ logoutFunction }
+                                title="sign out"
+                                >
+                                <LogOut />Sign Out
+                            </ButtonMRED>
+                        </div>
                     </div>
                 </>)
                 : <LoginComponent></LoginComponent>}

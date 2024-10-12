@@ -3,6 +3,8 @@ import Title from "../components/Title";
 import Subtitle from "../components/Subtitle";
 import CheckListItem from "../components/CheckListItem";
 import ClientsContext from "../contexts/ClientsContext";
+import ButtonMRED from "../components/ButtonMRED";
+import ButtonMBLUE from "../components/ButtonMBLUE";
 import { ChevronLeftIcon } from "lucide-react";
 import { useContext, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -68,7 +70,7 @@ function EditDeletedClientPage() {
                     </CheckListItem>
 
                     <div className="flex space-x-2  justify-around py-5">
-                        <button className="bg-red-200 rounded-md p-2 text-lg w-36"
+                        <ButtonMRED 
                         onClick={() =>{
                             const setDel = {
                                 isDeleted: true,
@@ -77,9 +79,9 @@ function EditDeletedClientPage() {
                             navigate(`/meucliente/recicle`)
                             }}>
                             Excluir Definitivamente
-                        </button>
+                        </ButtonMRED>
 
-                        <button className="bg-blue-200 rounded-md p-2 text-lg w-36"
+                        <ButtonMBLUE className="bg-blue-200 rounded-md p-2 text-lg w-36"
                         onClick={() =>{
                             const setNonDeleted = {
                                 isDeleted: false,
@@ -88,12 +90,7 @@ function EditDeletedClientPage() {
                             navigate(`/meucliente/initial/`)
                             }}>
                             Restaurar
-                        </button>
-
-
-
-
-
+                        </ButtonMBLUE>
                     </div>
                 </ul>
             </div>

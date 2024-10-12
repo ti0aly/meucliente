@@ -15,8 +15,6 @@ function UserMessages() {
     const clientId = params.get('id');
     const client = clients.find(client => client.id === Number(clientId));
 
-    // console.log("userData.displayName: ", userData.displayName);
-
     return (
         <div className='flex justify-around min-w-80 w-full bg-slate-200 text-center h-screen'>
             <div className="min-w-80 max-w-xl space-y-2 ">

@@ -6,6 +6,9 @@ import ClientsContext from "../contexts/ClientsContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UserX, Save, Undo2 } from "lucide-react";
+import ButtonMRED from "../components/ButtonMRED";
+import ButtonMSLATE from "../components/ButtonMSLATE";
+import ButtonMBLUE from "../components/ButtonMBLUE";
 
 
 function EditClientPage() {
@@ -74,9 +77,8 @@ function EditClientPage() {
                     </CheckListItem>
                 </ul>
                     <div className="flex flex-wrap justify-around items-center align-middle space-x-2 space-y-2 max-w-96 py-5">
-                        <button 
-                        className="flex justify-center p-1 text-gray-800 w-40 bg-red-300 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150"
-                        onClick={() =>{
+                        <ButtonMRED 
+                            onClick={() =>{
                             const setDel = {
                                 isDeleted: true,
                             }
@@ -84,23 +86,21 @@ function EditClientPage() {
                             navigate(`/meucliente/initial/`);
                             }}>
                             <UserX />Excluir
-                        </button>
+                        </ButtonMRED>
 
-                        <button 
-                        className="flex justify-center p-1 text-gray-800 w-40 bg-blue-200 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150"
-                        onClick={() =>{
+                        <ButtonMBLUE 
+                            onClick={() =>{
                             updateClients( client.id, newClientData);
                             navigate(`/meucliente/initial/`);
                             }}>
                             <Save />Salvar
-                        </button>
-                        <button 
-                            className="flex justify-center p-1 text-gray-800 w-40 bg-slate-100 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
+                        </ButtonMBLUE>
+                        <ButtonMSLATE 
                             onClick={() =>{ navigate(-1)}}
                             title="back"
                             >
                             <Undo2 />Voltar 
-                        </button>
+                        </ButtonMSLATE>
 
 
 

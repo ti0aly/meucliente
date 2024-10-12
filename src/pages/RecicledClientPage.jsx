@@ -2,27 +2,25 @@ import Title from "../components/Title";
 import Subtitle from "../components/Subtitle";
 import DeletedClientView from "../components/DeletedClientView";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeftIcon } from "lucide-react";
+import ButtonMSLATE from "../components/ButtonMSLATE";
+import { Undo2 } from "lucide-react";
 
 function RecicledClientPage() {
     const navigate = useNavigate();
     return (
         <div className='flex justify-center bg-slate-200 min-w-80 text-center h-screen'>
-            <div className="max-w-xl min-w-80 space-y-1">
+            <div className="max-w-xl min-w-80 space-y-1 justify-center">
                 <Title>Meu cliente</Title>
                 <Subtitle>Clientes excluídos:</Subtitle>
-                <button
-                    onClick={() => navigate('/meucliente/initial/')}
-                    className="absolute left-0 top-0 bottom-0 text-lg">
-                    <ChevronLeftIcon />
-                </button>
                 <DeletedClientView></DeletedClientView>
-                <button className="bg-blue-200 rounded-md p-2 text-lg w-36"
-                    onClick={() =>{
-                        navigate(`/meucliente/initial/`)
-                        }}>
-                        Voltar
-                </button>
+                <div className="flex justify-center">
+                    <ButtonMSLATE className="bg-blue-200 rounded-md p-2 text-lg w-36"
+                        onClick={() =>{
+                            navigate(`/meucliente/initial/`)
+                            }}>
+                            <Undo2 /> Voltar
+                    </ButtonMSLATE>
+                </div>
             </div>
         </div>
     )

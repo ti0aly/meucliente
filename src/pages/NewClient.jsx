@@ -5,7 +5,9 @@ import CheckListItem from "../components/CheckListItem";
 import ClientsContext from "../contexts/ClientsContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { X, Check } from "lucide-react";
+import { X, Check, Undo2, Save} from "lucide-react";
+import ButtonMSLATE from "../components/ButtonMSLATE";
+import ButtonMBLUE from "../components/ButtonMBLUE";
 
 function NewClient() {
     const { addClient } = useContext(ClientsContext);
@@ -91,13 +93,13 @@ function NewClient() {
                     </CheckListItem> 
 
                     <div className="flex space-x-2 justify-around py-5">
-                        <button className="bg-red-200 rounded-md p-1 text-lg w-28"
+                        <ButtonMSLATE className="bg-red-200 rounded-md p-1 text-lg w-28"
                         onClick={() =>{
                             navigate('/meucliente/initial/');
                             }}>
-                            Voltar
-                        </button>
-                        <button className="bg-blue-200 rounded-md p-1 text-lg w-28"
+                            <Undo2 />Voltar
+                        </ButtonMSLATE>
+                        <ButtonMBLUE className="bg-blue-200 rounded-md p-1 text-lg w-28"
                         onClick={() =>{
                             if (clientName === "") {
                                 alert("Não é possível criar um cliente sem nome, crie ao menos uma referência.")
@@ -108,8 +110,8 @@ function NewClient() {
                             
                             }
                             }>
-                            Salvar
-                        </button>
+                            <Save />Salvar
+                        </ButtonMBLUE>
 
                     </div>
                 </ul>

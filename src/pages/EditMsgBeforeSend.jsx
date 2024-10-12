@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Subtitle from "../components/Subtitle";
 import WhatsappIcon from "../components/WhatsappIcon";
 import { Undo2 } from "lucide-react";
+import ButtonMGREEN from "../components/ButtonMGREEN";
+import ButtonMSLATE from "../components/ButtonMSLATE";
 
 function EditMsgBeforeSend() {
     const navigate = useNavigate();
@@ -33,16 +35,15 @@ function EditMsgBeforeSend() {
                 </textarea>
                 <div className="flex justify-center">
 
-                    <button
-                        className="flex justify-center p-1 text-gray-800 w-40 bg-slate-100 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150"
+                    <ButtonMSLATE
+
                         onClick={() =>{ navigate(-1)}}
                     
                         title="back"
                         >
                         <Undo2 />Voltar
-                    </button>
-                    <button
-                        className="flex justify-center items-center p-1 text-gray-800 w-40 bg-green-300 border border-gray-300 rounded-full shadow hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150"
+                    </ButtonMSLATE>
+                    <ButtonMGREEN
                         onClick={() => {
                             const formattedMsg = encodeURIComponent(editedMsg);
                             const whatsappURL = `https://api.whatsapp.com/send?phone=${phone}&text=${formattedMsg}`;
@@ -52,7 +53,7 @@ function EditMsgBeforeSend() {
                         >
                     
                         <WhatsappIcon></WhatsappIcon>&nbsp;Enviar agora
-                    </button>
+                    </ButtonMGREEN>
                 </div>
             </div>
 

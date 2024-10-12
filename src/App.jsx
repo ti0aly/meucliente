@@ -32,8 +32,8 @@ function App() {
     const userData = await receiveClientsServer(collection, userDataReceived.uid);
     if (userData !== undefined) {
       const objectCustom = userData.clientObject;
-      console.log("objectCustom in getUserData: ", objectCustom);
-      console.log("objectCustom.customName in getUserData: ", objectCustom.customName);
+      // console.log("objectCustom in getUserData: ", objectCustom);
+      // console.log("objectCustom.customName in getUserData: ", objectCustom.customName);
       setUserName(objectCustom.customName);
     }
 
@@ -109,12 +109,12 @@ function App() {
 //     }
 // }, [userData]);
 
-  useEffect(() => {
-    if (userCustomData !== undefined) {
-      console.log("userCustomData in useEffect: ", userCustomData);
-      console.log("userCustomData.customName in useEffect: ", userCustomData.customName);
-    }
-}, [userCustomData]);
+//   useEffect(() => {
+//     if (userCustomData !== undefined) {
+//       console.log("userCustomData in useEffect: ", userCustomData);
+//       console.log("userCustomData.customName in useEffect: ", userCustomData.customName);
+//     }
+// }, [userCustomData]);
 
   useEffect(() => {
     if(flagUpdateServer > 0) {

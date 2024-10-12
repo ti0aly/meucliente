@@ -3,6 +3,7 @@ import InitialPage from "../pages/InitialPage";
 import ClientPage from "../pages/ClientPage";
 import NewClient from "../pages/NewClient";
 import EditClientPage from "../pages/EditClientPage";
+import EditUserMessages from "../pages/EditUserMessages";
 import EditDeletedClientPage from "../pages/EditDeletedClientPage";
 import RecicledClientPage from "../pages/RecicledClientPage";
 import LoginPage from "../pages/LoginPage";
@@ -21,6 +22,7 @@ function ClientRoutes () {
             <Route path="/meucliente/usermessages/" element={<UserMessages />} ></Route>
             <Route path="/meucliente/editbeforesend/" element={ <EditMsgBeforeSend /> } ></Route>
             <Route path="/meucliente/" element={ <LoginPage /> } />
+            <Route path="/meucliente/editusermessages/" element={<EditUserMessages />}></Route>
         </Routes>
     )
 }
