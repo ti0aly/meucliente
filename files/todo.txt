@@ -1,0 +1,17 @@
+Tarefas
+
+
+- página de solicitação de orçamento (gerar um link para que o cliente faça a solicitação)
+
+- ajustar layout profissional
+
+- calendário
+
+- seleção de configuração para tipos de serviço 
+    - 
+    - (pode configurar um default e permitir ajustes na hora do agendamento)
+
+- gerenciamento de mensagens
+
+- 
+

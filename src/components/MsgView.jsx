@@ -5,7 +5,7 @@ import { Pencil } from "lucide-react";
 import WhatsappIconMini from "./WhatsappIcon";
 
 function MsgView() {
-    const {clients, userMessages } = useContext(ClientsContext);
+    const {clients, userMessages, formatVariableString, userName } = useContext(ClientsContext);
     const navigate = useNavigate();
     const [params] = useSearchParams();
     const clientId = params.get('id');
@@ -42,10 +42,20 @@ function MsgView() {
                                 <button 
                                     className="bg-green-300 p-2 rounded-lg flex justify-center"
                                     onClick={() => {
-                                        const name = client.name;
                                         const phone = client.phone;
-                                        const mensagemFormatada = encodeURIComponent(msg);
-                                        window.open(`https://api.whatsapp.com/send?phone=+55${phone}&text=${msg}`, '_blank')
+                                        const clientName = client.name;
+                                        const data = client.data;
+                                        const objectWithParams = {
+                                            clientName,
+                                            userName,
+                                            data,
+                                        }
+                                        const msgFormatada = formatVariableString(msg, objectWithParams);
+                                        console.log("msgFormatada", msgFormatada)
+                                        // console.log("literalMsg: ", literalMsg)
+                                        // const mensagemFormatada = encodeURIComponent(msg);
+                                        // console.log("mensagemFormatada: ", mensagemFormatada)
+                                        // window.open(`https://api.whatsapp.com/send?phone=+55${phone}&text=${msg}`, '_blank')
                                     }}
                                     >
                                 <WhatsappIconMini></WhatsappIconMini>

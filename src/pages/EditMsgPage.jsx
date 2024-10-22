@@ -20,9 +20,9 @@ function EditMsgPage() {
     }
 
     const handleChangeUserMessages = (index, newMessage) => {
-        const updatedMessagesArray = userMessages[index] = newMessage;
-        setUserMessages(updatedMessagesArray);
-        setDataServer("msgsdegusta", userData.uid, updatedMessagesArray);
+        userMessages[index] = newMessage;
+        setUserMessages(userMessages);
+        setDataServer("msgsdegusta", userData.uid, userMessages);
     }
 
     // useEffect(() => {
@@ -55,6 +55,7 @@ function EditMsgPage() {
                         <ButtonMBLUE 
                             onClick={() => {
                                 handleChangeUserMessages(index, editedMsg);
+                                navigate(-1);
                             }}
                             >
                             <Save />&nbsp;Salvar

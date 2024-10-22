@@ -1,5 +1,5 @@
 function Subtitle(props) {
-    return <div className="bg-blue-950 bg-opacity-10 rounded-xl text-xl flex justify-center items-center p-1">
+    return <div className="bg-blue-950 bg-opacity-10 rounded-xl text-xl flex justify-center items-center p-1 drop-shadow-md">
         {props.children}
     </div>
 }

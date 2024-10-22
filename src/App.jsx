@@ -164,27 +164,29 @@ function App() {
     return saudacao;
   }
 
-  const convertToLiteral = (str) => {
-    if ((str.startsWith('"') && str.endsWith('"')) || (str.startsWith("'") && str.endsWith("'"))) {
-      str = str.slice(1, -1); 
-    }
-    const newString = '`' + str + '`';
-    // console.log("newString on consvertToLiteral", newString)
-    // alert(newString)
-    return newString
+  const formatDataBr = (data) => {
+    const [ano, mes, dia] = data.split("-");
+    return `${dia}-${mes}-${ano}`;
   }
 
-  const formatVariableString = (str) => {
-    const variableClientName = '${(client.name).split(" ")[0]}';
-    const variableUserName = '${userName !== undefined && userName || userData.displayName }';
-    const saudacao = '${obterSaudacao}';
-    const data = '${client.data !== "" && client.data || "" }';
+  const formatVariableString = (str, objectWithParams) => {
+
+    const variableClientName = objectWithParams.clientName;
+    const variableUserName = objectWithParams.userName;
+    const data = objectWithParams.data;
+    const formatedData = formatDataBr(data);
+    const saudacao = obterSaudacao();
+    console.log("saudacao: ", saudacao)
+
     let newString = str
       .replace(/&cliente/g, variableClientName)
       .replace(/&meunome/g, variableUserName)
       .replace(/&ola/g, saudacao)
-      .replace(/&data/g, data);
-    return convertToLiteral(newString)
+      .replace(/&data/g, formatedData);
+    
+    // first upper
+    
+    return (newString.charAt(0).toUpperCase() + newString.slice(1))
   }
 
   
