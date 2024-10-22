@@ -8,5 +8,5 @@ export default defineConfig({server: {
   },
 },
   plugins: [react()],
-  base: '/meucliente/',
+  base: '/',
 })

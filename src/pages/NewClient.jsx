@@ -94,7 +94,7 @@ function NewClient() {
                     <div className="flex flex-wrap justify-around py-5">
                         <ButtonMSLATE 
                         onClick={() =>{
-                            navigate('/meucliente/initial/');
+                            navigate('/initial/');
                             }}>
                             <Undo2 />Voltar
                         </ButtonMSLATE>
@@ -104,7 +104,7 @@ function NewClient() {
                                 alert("Não é possível criar um cliente sem nome, crie ao menos uma referência.")
                             } else {
                             addClient(newClient);
-                            navigate(`/meucliente/client?id=${String(newClient.id)}`);
+                            navigate(`/client?id=${String(newClient.id)}`);
                           };
                             }
                             }>

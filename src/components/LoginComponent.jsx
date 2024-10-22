@@ -60,7 +60,7 @@ function LoginComponent() {
             { <img className='rounded-full max-w-24' src={user !== null && user.photoURL || userData.photoURL} alt="" /> }
             <button
                 className="flex-wrap items-center justify-center px-4 py-2 min-w-48 text-gray-800 bg-blue-200 border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
-                onClick={() => navigate('/meucliente/initial/')}
+                onClick={() => navigate('/initial/')}
                 >
                     Ir para meus clientes
             </button>
@@ -80,7 +80,7 @@ function LoginComponent() {
                     className="flex items-center justify-center mt-8 px-4 py-2 text-gray-800 bg-white border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150"
                     onClick={loginWithGoogle}
                     >
-                        <img src="/meucliente/images/google-icon.svg" className='w-5 h-5 mr-2 '/>
+                        <img src="/images/google-icon.svg" className='w-5 h-5 mr-2 '/>
                         Login with Google
                 </button>
                 

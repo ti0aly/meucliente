@@ -17,18 +17,18 @@ function ClientRoutes () {
     return (
 
         <Routes>
-            <Route path="/meucliente/initial/" element={<InitialPage />} />
-            <Route path="/meucliente/client/" element={<ClientPage />} />
-            <Route path="/meucliente/newclient/" element={<NewClient />}/>
-            <Route path="/meucliente/editclient/" element={<EditClientPage />}/>
-            <Route path="/meucliente/editdeletedclient/" element={<EditDeletedClientPage />}/>
-            <Route path="/meucliente/recicle/" element={<RecicledClientPage />}/>
-            <Route path="/meucliente/usermessages/" element={<UserMessages />} ></Route>
-            <Route path="/meucliente/editbeforesend/" element={ <EditMsgBeforeSend /> } ></Route>
-            <Route path="/meucliente/" element={ <LoginPage /> } />
-            <Route path="/meucliente/editusermessages/" element={<EditUserMessages />}></Route>
-            <Route path="/meucliente/addnewmsg/" element={<AddNewMsg />}></Route>
-            <Route path="/meucliente/editmsgpage/" element={<EditMsgPage />}></Route>
+            <Route path="/initial/" element={<InitialPage />} />
+            <Route path="/client/" element={<ClientPage />} />
+            <Route path="/newclient/" element={<NewClient />}/>
+            <Route path="/editclient/" element={<EditClientPage />}/>
+            <Route path="/editdeletedclient/" element={<EditDeletedClientPage />}/>
+            <Route path="/recicle/" element={<RecicledClientPage />}/>
+            <Route path="/usermessages/" element={<UserMessages />} ></Route>
+            <Route path="/editbeforesend/" element={ <EditMsgBeforeSend /> } ></Route>
+            <Route path="/" element={ <LoginPage /> } />
+            <Route path="/editusermessages/" element={<EditUserMessages />}></Route>
+            <Route path="/addnewmsg/" element={<AddNewMsg />}></Route>
+            <Route path="/editmsgpage/" element={<EditMsgPage />}></Route>
             <Route path="/autoclient/" element={<AutoClient />}></Route>
 
         </Routes>

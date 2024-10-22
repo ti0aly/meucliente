@@ -43,7 +43,7 @@ function ClientPage() {
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
-                            navigate(`/meucliente/editclient?${query.toString()}`);
+                            navigate(`/editclient?${query.toString()}`);
                         }}
                         >
                         <UserRoundPen />&nbsp;
@@ -57,7 +57,7 @@ function ClientPage() {
                             if (client.phone === 0) {
                                 alert("Esse cliente não tem telefone cadastrado")
                             } else {
-                            navigate(`/meucliente/usermessages?${query.toString()}`);
+                            navigate(`/usermessages?${query.toString()}`);
                             }
                         }}
                         title="my messages"
@@ -67,7 +67,7 @@ function ClientPage() {
                     </ButtonMGREEN>
 
                     <ButtonMSLATE 
-                            onClick={() =>{ navigate("/meucliente/initial/")}}
+                            onClick={() =>{ navigate("/initial/")}}
                             title="back"
                             >
                         <Undo2 />Voltar 

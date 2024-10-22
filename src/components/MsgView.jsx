@@ -31,7 +31,7 @@ function MsgView() {
                                     className="bg-slate-200 p-2 rounded-lg flex justify-center"
                                     onClick={() => {
                                             const phone = client.phone;
-                                            navigate('/meucliente/editbeforesend/', {
+                                            navigate('/editbeforesend/', {
                                                 state: { msg , phone }
                                         })
                                         }

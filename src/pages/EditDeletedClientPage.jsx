@@ -23,7 +23,7 @@ function EditDeletedClientPage() {
                 <Title  className='max-w-80 overflow-hidden'>Cliente Excluído</Title>
                 <Subtitle>{client.name}</Subtitle>
                 <button
-                    onClick={() => navigate('/meucliente/recicle/')}
+                    onClick={() => navigate('/recicle/')}
                     className="absolute left-0 top-0 bottom-0 text-lg">
                     <ChevronLeftIcon />
                 </button>
@@ -51,7 +51,7 @@ function EditDeletedClientPage() {
                                 isDeleted: true,
                             }
                             dellClient(client.id);
-                            navigate(`/meucliente/recicle`)
+                            navigate(`/recicle`)
                             }}>
                             <Trash2 />Definitivo
                         </ButtonMRED>
@@ -62,7 +62,7 @@ function EditDeletedClientPage() {
                                 isDeleted: false,
                             }
                             updateClients( client.id, setNonDeleted);
-                            navigate(`/meucliente/initial/`)
+                            navigate(`/initial/`)
                             }}>
                             <History />  Restaurar
                         </ButtonMBLUE>

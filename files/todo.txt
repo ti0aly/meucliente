@@ -34,6 +34,6 @@ isso aqui se tiver map nas views:
     
     useEffect(() => { // verify login
         if (userData === undefined) {
-            navigate('/meucliente/initial'); 
+            navigate('/initial'); 
         }
     }, [userData, navigate]);

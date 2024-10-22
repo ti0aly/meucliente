@@ -61,7 +61,7 @@ function EditMsgView() {
                                         const query = new URLSearchParams();
                                         // query.set("msg", msg);
                                         query.set("index", index);
-                                        navigate(`/meucliente/editmsgpage?${query.toString()}`);
+                                        navigate(`/editmsgpage?${query.toString()}`);
                                         }
                                     }
                                     >

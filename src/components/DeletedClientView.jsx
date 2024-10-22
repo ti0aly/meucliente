@@ -36,7 +36,7 @@ function DeletedClientView() {
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
-                            navigate(`/meucliente/editdeletedclient?${query.toString()}`);
+                            navigate(`/editdeletedclient?${query.toString()}`);
                         }}
                         >
                         <p className="text-base text-red-800 font-semibold w-36 overflow-hidden">{client.name}</p>

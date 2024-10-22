@@ -33,7 +33,7 @@ function InitialPage() {
         console.log("chamou");
         signOut(auth);
         setThisUserData(null);
-        navigate('/meucliente/');
+        navigate('/');
     }
 
     return (
@@ -63,20 +63,20 @@ function InitialPage() {
                     <div className="flex flex-wrap justify-center items-center">
 
                             <ButtonMBLUE
-                                onClick={() =>{ navigate('/meucliente/newclient/')}}
+                                onClick={() =>{ navigate('/newclient/')}}
                                 title="add client"
                                 >
                                 <UserPlus />Adicionar
                             </ButtonMBLUE>
                             <ButtonMGREEN
-                                onClick={() =>{ navigate('/meucliente/editusermessages/')}}
+                                onClick={() =>{ navigate('/editusermessages/')}}
                                 title="Messages"
                                 >
                                 <MessageCircleMore />Mensagens
                             </ButtonMGREEN>
 
                             <ButtonMSLATE
-                                onClick={() =>{ navigate('/meucliente/recicle/')}}
+                                onClick={() =>{ navigate('/recicle/')}}
                                 title="recicle"
                                 >
                             <Trash2 />Excluídos

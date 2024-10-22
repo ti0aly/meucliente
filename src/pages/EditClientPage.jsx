@@ -83,7 +83,7 @@ function EditClientPage() {
                                 isDeleted: true,
                             }
                             updateClients(client.id, setDel);
-                            navigate(`/meucliente/initial/`);
+                            navigate(`/initial/`);
                             }}>
                             <UserX />Excluir
                         </ButtonMRED>
@@ -91,7 +91,7 @@ function EditClientPage() {
                         <ButtonMBLUE 
                             onClick={() =>{
                             updateClients( client.id, newClientData);
-                            navigate(`/meucliente/initial/`);
+                            navigate(`/initial/`);
                             }}>
                             <Save />Salvar
                         </ButtonMBLUE>

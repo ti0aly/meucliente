@@ -16,7 +16,7 @@ function RecicledClientPage() {
                 <div className="flex justify-center">
                     <ButtonMSLATE className="bg-blue-200 rounded-md p-2 text-lg w-36"
                         onClick={() =>{
-                            navigate(`/meucliente/initial/`)
+                            navigate(`/initial/`)
                             }}>
                             <Undo2 /> Voltar
                     </ButtonMSLATE>

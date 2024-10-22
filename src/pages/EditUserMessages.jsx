@@ -14,7 +14,7 @@ function EditUserMessages() {
     
     useEffect(() => { // verify login
         if (userData === undefined) {
-            navigate('/meucliente/initial'); 
+            navigate('/initial'); 
         }
     }, [userData, navigate]);
 
@@ -49,7 +49,7 @@ function EditUserMessages() {
                             </ButtonMSLATE>
                             <ButtonMBLUE 
                                 className="flex justify-center p-1 text-gray-800 w-40 bg-green-300 border border-gray-300 rounded-full shadow hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
-                                onClick={() =>{ navigate("/meucliente/addnewmsg/")}}
+                                onClick={() =>{ navigate("/addnewmsg/")}}
                                 >
                                 <MailPlus />Add Msg
                             </ButtonMBLUE>

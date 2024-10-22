@@ -40,7 +40,7 @@ function ClientView() {
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
-                            navigate(`/meucliente/client?${query.toString()}`);
+                            navigate(`/client?${query.toString()}`);
                         }}
                         >
                         <p className="text-base font-semibold w-36 overflow-hidden">{(client.name)}</p>
