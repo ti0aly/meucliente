@@ -176,16 +176,13 @@ function App() {
     const data = objectWithParams.data;
     const formatedData = formatDataBr(data);
     const saudacao = obterSaudacao();
-    console.log("saudacao: ", saudacao)
-
     let newString = str
-      .replace(/&cliente/g, variableClientName)
+      .replace(/&cliente/g, variableClientName.split(' ')[0]) // first name only 
       .replace(/&meunome/g, variableUserName)
       .replace(/&ola/g, saudacao)
       .replace(/&data/g, formatedData);
     
-    // first upper
-    
+    // first upper (to undo >> just return newString)
     return (newString.charAt(0).toUpperCase() + newString.slice(1))
   }
 

@@ -37,6 +37,7 @@ function InitialPage() {
     }
 
     return (
+        
         <div className='flex justify-center bg-slate-200 min-w-72 text-center h-screen'>
             <div className="max-w-xl min-w-72 space-y-2 ">
                 <Title>Meu cliente</Title>
@@ -44,15 +45,15 @@ function InitialPage() {
                 <Subtitle>
                 {userData !== undefined && 
                 <>
-                <img className='w-6 h-6 rounded-full mr-1'  src={ userData !== undefined && userData.photoURL  || ""} alt="" />
-                Clientes de&nbsp; 
-                <button
-                    onClick={handleChangeCustomUserName} 
-                    className="flex" >
-                    {userName !== undefined && userName || userData.displayName }
-                    <Pencil className="w-3"></Pencil>
-                </button>
-            </> 
+                    <img className='w-6 h-6 rounded-full mr-1'  src={ userData !== undefined && userData.photoURL  || ""} alt="" />
+                    Clientes de&nbsp; 
+                    <button
+                        onClick={handleChangeCustomUserName} 
+                        className="flex" >
+                        {userName !== undefined && userName || userData.displayName }
+                        <Pencil className="w-3"></Pencil>
+                    </button>
+                </> 
                 || "Você precisa estar logado."}
                 </Subtitle>
                 {userData !== undefined

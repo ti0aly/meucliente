@@ -11,9 +11,11 @@ import UserMessages from "../pages/UserMessages";
 import EditMsgBeforeSend from "../pages/EditMsgBeforeSend";
 import AddNewMsg from "../pages/AddNewMsg";
 import EditMsgPage from "../pages/EditMsgPage";
+import AutoClient from "../pages/AutoClient";
 
 function ClientRoutes () {
     return (
+
         <Routes>
             <Route path="/meucliente/initial/" element={<InitialPage />} />
             <Route path="/meucliente/client/" element={<ClientPage />} />
@@ -27,7 +29,10 @@ function ClientRoutes () {
             <Route path="/meucliente/editusermessages/" element={<EditUserMessages />}></Route>
             <Route path="/meucliente/addnewmsg/" element={<AddNewMsg />}></Route>
             <Route path="/meucliente/editmsgpage/" element={<EditMsgPage />}></Route>
+            <Route path="/autoclient/" element={<AutoClient />}></Route>
+
         </Routes>
+        
     )
 }
 

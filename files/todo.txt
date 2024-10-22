@@ -8,10 +8,32 @@ Tarefas
 - calendário
 
 - seleção de configuração para tipos de serviço 
-    - 
+    - baixar lista de ocupações abrangidas pelo MEI
     - (pode configurar um default e permitir ajustes na hora do agendamento)
 
 - gerenciamento de mensagens
 
 - 
 
+
+
+-----------------------------------------------------------------
+- tratar os erros com redirecionamento:
+
+isso aqui se tiver map nas views:
+<>
+    {userData !== undefined
+    ? (
+
+   )
+    : <LoginComponent></LoginComponent>}
+</>
+
+- isso aqui redireciona:
+    const { userData } = useContext(ClientsContext);
+    
+    useEffect(() => { // verify login
+        if (userData === undefined) {
+            navigate('/meucliente/initial'); 
+        }
+    }, [userData, navigate]);

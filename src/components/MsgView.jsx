@@ -51,11 +51,8 @@ function MsgView() {
                                             data,
                                         }
                                         const msgFormatada = formatVariableString(msg, objectWithParams);
-                                        console.log("msgFormatada", msgFormatada)
-                                        // console.log("literalMsg: ", literalMsg)
-                                        // const mensagemFormatada = encodeURIComponent(msg);
-                                        // console.log("mensagemFormatada: ", mensagemFormatada)
-                                        // window.open(`https://api.whatsapp.com/send?phone=+55${phone}&text=${msg}`, '_blank')
+                                        const msgToSend = encodeURIComponent(msgFormatada);
+                                        window.open(`https://api.whatsapp.com/send?phone=+55${phone}&text=${msgToSend}`, '_blank')
                                     }}
                                     >
                                 <WhatsappIconMini></WhatsappIconMini>
