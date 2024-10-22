@@ -1,19 +1,30 @@
-import { useState} from "react"
+import { useContext, useState} from "react"
 import { useLocation, useNavigate } from "react-router-dom";
 import Subtitle from "../components/Subtitle";
-import WhatsappIcon from "../components/WhatsappIcon";
-import { Undo2 } from "lucide-react";
-import ButtonMGREEN from "../components/ButtonMGREEN";
+import { Save, Undo2 } from "lucide-react";
+import ButtonMBLUE from "../components/ButtonMBLUE";
 import ButtonMSLATE from "../components/ButtonMSLATE";
+import ClientsContext from "../contexts/ClientsContext";
 
-function EditMsgBeforeSend() {
+function EditMsgPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { msg, phone } = location.state || {};
-    const [editedMsg, setEditedMsg] = useState();
+    const queryParams = new URLSearchParams(location.search);
+    const index = queryParams.get('index');
+
+    const { setUserMessages, userMessages, setDataServer, userData } = useContext(ClientsContext);
+
+    const [editedMsg, setEditedMsg] = useState(userMessages[index]);
+    const indexNumber = parseInt(index, 10);
 
     const handleChangeMsg = (e) => {
         setEditedMsg(e.target.value);  
+    }
+
+    const handleChangeUserMessages = (index, newMessage) => {
+        const updatedMessagesArray = userMessages[index] = newMessage;
+        setUserMessages(updatedMessagesArray);
+        setDataServer("msgsdegusta", userData.uid, updatedMessagesArray);
     }
 
     // useEffect(() => {
@@ -25,44 +36,31 @@ function EditMsgBeforeSend() {
             
             <div className="max-w-xl space-y-2 ">
                 
-                <Subtitle>Edite e envie</Subtitle>
+                <Subtitle>Edite a mensagem</Subtitle>
                 <textarea 
                     className="w-full max-w-xl h-72 overflow-hidden p-2 rounded-xl" 
                     name="msgtext" 
                     id="" 
-                    defaultValue={msg}
+                    value={userMessages[indexNumber]}
                     onChange={handleChangeMsg}>
                 </textarea>
                 <div className="flex flex-wrap justify-center">
-<div  className="p-1">
-    
-                        <ButtonMSLATE
-    
+                    <div  className="p-1">
+                         <ButtonMSLATE
                             onClick={() =>{ navigate(-1)}}
-    
                             title="back"
                             >
                             <Undo2 />Voltar
                         </ButtonMSLATE>
-    
-</div>
+                    </div>
                     <div  className="p-1">
-                        <ButtonMGREEN
+                        <ButtonMBLUE 
                             onClick={() => {
-                                let formattedMsg;
-                                if (editedMsg !== undefined) {
-                                    formattedMsg = encodeURIComponent(editedMsg);
-                                } else {
-                                    formattedMsg = encodeURIComponent(msg);
-                                }
-                                const whatsappURL = `https://api.whatsapp.com/send?phone=${phone}&text=${formattedMsg}`;
-                                window.open(whatsappURL, '_blank')
+                                handleChangeUserMessages(index, editedMsg);
                             }}
-                        
                             >
-                        
-                            <WhatsappIcon></WhatsappIcon>&nbsp;Enviar agora
-                        </ButtonMGREEN>
+                            <Save />&nbsp;Salvar
+                        </ButtonMBLUE>
                     </div>
                 </div>
             </div>
@@ -72,4 +70,4 @@ function EditMsgBeforeSend() {
 }
 
 
-export default EditMsgBeforeSend
+export default EditMsgPage

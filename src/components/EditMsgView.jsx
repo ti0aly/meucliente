@@ -1,25 +1,36 @@
 import { useContext } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+
 import ClientsContext from "../contexts/ClientsContext";
-import { Pencil } from "lucide-react";
-import WhatsappIconMini from "./WhatsappIcon";
-import ButtonMSLATE from "./ButtonMSLATE";
+import { Pencil, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function EditMsgView() {
-    const {clients, userData, userName } = useContext(ClientsContext);
+    const { userData, userMessages, setUserMessages, setDataServer } = useContext(ClientsContext);
+    const navigate = useNavigate();
+    const handleRemoveUserMessage = (indexToRemove) => {
+        const confirmDelete = window.confirm("Tem certeza que deseja excluir esta mensagem?");
+        if (confirmDelete) {
+            const updatedMessagesArray = userMessages.filter((_, index) => index !== indexToRemove);
+            setUserMessages(updatedMessagesArray);
+            setDataServer("msgsdegusta", userData.uid, updatedMessagesArray);
+        }
+    }
 
-    const mensagens = [
-        `Olá , aqui é da banda DEGUSTASOM, tudo bem? Entro em contato pela solicitação de orçamento recebida.\n\nVerifiquei sua data  e ainda está disponível, gostaria de confirmar contigo a cidade e o número aproximado de convidados que estão calculando, para poder te passar valores.`,
-        `segue o orçamento solicitado.`,
-        `tudo bem? A proposta enviada está dentro do orçamento de vocês pra música do casamento?`
-     ] ;
-
+    // console.log("userMessages:", userMessages); // array de mensagens do user
+    // console.log("clients: ", clients); // objeto de clientes
+    // console.log("userData: ", userData); // userData.email or (displayName - photoURL - uid) 
+    // console.log("userName: ", userName); // Esse nome já é o nome customizado
+    
+    const client = {
+        data: "João"
+    }
+    
     return (
         <div>
             <div>
                 <ul className="space-y-2">
                     {
-                    mensagens.map((msg, index) =>
+                    userMessages.map((msg, index) =>
                         <li key={index} className="flex justify-between p-2 space-x-1 rounded-lg bg-white">
                             <p 
                                 className="text-base rounded-lg p-2 bg-white-100 text-justify w-full resize-none overflow-hidden"
@@ -27,8 +38,35 @@ function EditMsgView() {
                                 {msg}
                             </p>
                             <div className="flex flex-col justify-end space-y-1 rounded-lg">
+                                <button className="bg-red-200 p-2 rounded-lg flex justify-center"
+                                    onClick={() => {
+
+                                        handleRemoveUserMessage(index)
+                                    }}    
+                                >
+                                    <X className="w-4"/>
+                                </button>
+{/* 
+                                <button className="bg-slate-200 p-2 rounded-lg flex justify-center"
+                                    onClick={() => {
+                                        const msgFormated = formatVariableString(msg);
+                                        alert(formatVariableString(msg));
+
+                                        
+                                    }}
+                                >
+                                    <Glasses />
+                                </button> */}
+
                                 <button 
                                     className="bg-slate-200 p-2 rounded-lg flex justify-center"
+                                    onClick={() => {
+                                        const query = new URLSearchParams();
+                                        // query.set("msg", msg);
+                                        query.set("index", index);
+                                        navigate(`/meucliente/editmsgpage?${query.toString()}`);
+                                        }
+                                    }
                                     >
                                     <Pencil className="w-4"/>
                                 </button>

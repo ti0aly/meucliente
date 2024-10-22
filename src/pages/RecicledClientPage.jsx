@@ -8,8 +8,8 @@ import { Undo2 } from "lucide-react";
 function RecicledClientPage() {
     const navigate = useNavigate();
     return (
-        <div className='flex justify-center bg-slate-200 min-w-80 text-center h-screen'>
-            <div className="max-w-xl min-w-80 space-y-1 justify-center">
+        <div className='flex justify-center bg-slate-200 min-w-72 text-center h-screen'>
+            <div className="max-w-xl min-w-72 space-y-1 justify-center">
                 <Title>Meu cliente</Title>
                 <Subtitle>Clientes excluídos:</Subtitle>
                 <DeletedClientView></DeletedClientView>

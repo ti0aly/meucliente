@@ -6,7 +6,7 @@ import ClientRoutes from './components/ClientRoutes'
 
 function App() {
   const [userData, setUserData] = useState();
-  const [userCustomData, setUserCustomData] = useState();
+  const [userMessages, setUserMessages] = useState();
   const [userName, setUserName] = useState();
 
   const [flagUpdateServer, setFlagUpdateServer] = useState(0);
@@ -16,11 +16,15 @@ function App() {
 
   const setThisUserData = (userData) => {
     setUserData(userData);
-    // get all user clients  
     getClientListArray("clientesdegusta", userData);
-    // get user data
     getUserData("usersdegusta", userData);
+    getUserMessages("msgsdegusta", userData);
   };
+  const defaultMessages = [
+    `Olá &cliente, aqui é &meunome, tudo bem? Entro em contato pela solicitação de orçamento recebida. Verifiquei sua data &data e ainda está disponível, gostaria de confirmar contigo a cidade e o número aproximado de convidados que estão calculando, para poder te passar valores.`,
+    `Olá &cliente, segue o orçamento solicitado.`,
+    `Olá &cliente, tudo bem? A proposta enviada está dentro do orçamento de vocês pra música do casamento?`
+  ];
 
   // collection string
   const getClientListArray = async (collection, userDataReceived) => {
@@ -35,10 +39,29 @@ function App() {
       // console.log("objectCustom in getUserData: ", objectCustom);
       // console.log("objectCustom.customName in getUserData: ", objectCustom.customName);
       setUserName(objectCustom.customName);
-    }
-
-
+    } 
   }
+
+
+  
+
+  const getUserMessages = async (collection, userDataReceived) => {
+    const userData = await receiveClientsServer(collection, userDataReceived.uid);
+    // console.log("collection in getUserMessages in App.jsx", collection);
+    // console.log("userData in getUserMessages in App.jsx", userData);
+    // console.log("userDataReceived in getUserMessages in App.jsx", userDataReceived);
+    if (userData !== undefined) {
+      const objectCustom = userData.clientObject;
+      // console.log("objectCustom in getUserMessages: ", objectCustom);
+      setUserMessages(objectCustom);
+    } else {
+      setUserMessages(defaultMessages);
+      setDataServer("msgsdegusta", userDataReceived.uid, defaultMessages)
+
+    }
+  }
+
+
 
   const [clients, setClients] = useState();
 
@@ -97,6 +120,7 @@ function App() {
     // setDataServer('usersdegusta', userData.uid, userCustomData);
   }
 
+
   // useEffect(() => {
   //     if (clients !== undefined) {
   //     console.log("Clients updated: ", clients);
@@ -124,13 +148,49 @@ function App() {
         }
   }, [flagUpdateServer]);
 
+  const obterSaudacao = () => {
+    const agora = new Date();
+    const hora = agora.getHours();
+    let saudacao;
+  
+    if (hora >= 0 && hora < 12) {
+      saudacao = "bom dia";
+    } else if (hora >= 12 && hora < 18) {
+      saudacao = "boa tarde";
+    } else {
+      saudacao = "boa noite";
+    }
+  
+    return saudacao;
+  }
 
-    
+  const convertToLiteral = (str) => {
+    if ((str.startsWith('"') && str.endsWith('"')) || (str.startsWith("'") && str.endsWith("'"))) {
+      str = str.slice(1, -1); 
+    }
+    const newString = '`' + str + '`';
+    // console.log("newString on consvertToLiteral", newString)
+    // alert(newString)
+    return newString
+  }
+
+  const formatVariableString = (str) => {
+    const variableClientName = '${(client.name).split(" ")[0]}';
+    const variableUserName = '${userName !== undefined && userName || userData.displayName }';
+    const saudacao = '${obterSaudacao}';
+    const data = '${client.data !== "" && client.data || "" }';
+    let newString = str
+      .replace(/&cliente/g, variableClientName)
+      .replace(/&meunome/g, variableUserName)
+      .replace(/&ola/g, saudacao)
+      .replace(/&data/g, data);
+    return convertToLiteral(newString)
+  }
 
   
 
   return (
-    <ClientsContext.Provider value={{clients, userName, userData, updateClients, addClient, dellClient, setThisUserData, setUserData, handleChangeCustomUserName}}>
+    <ClientsContext.Provider value={{clients, userName, userData, userMessages, obterSaudacao, setDataServer, updateClients, addClient, dellClient, setThisUserData, setUserData, handleChangeCustomUserName, setUserMessages}}>
       <ClientRoutes/>
     </ClientsContext.Provider>
   )

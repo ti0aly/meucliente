@@ -1,9 +1,8 @@
-import React from "react";
 import Title from "../components/Title";
 import Subtitle from "../components/Subtitle";
 import CheckListItem from "../components/CheckListItem";
 import ClientsContext from "../contexts/ClientsContext";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Check, Undo2, Save} from "lucide-react";
 import ButtonMSLATE from "../components/ButtonMSLATE";
@@ -40,7 +39,7 @@ function NewClient() {
     }
 
     const [clientDataAvailable, setclientDataAvailable] = useState(false);
-    const handleChangeDataAvailable = (event) => {
+    const handleChangeDataAvailable = () => {
         setclientDataAvailable(!clientDataAvailable);
     }
 
@@ -63,25 +62,25 @@ function NewClient() {
         isDeleted: false,
     }
     return (
-        <div className='flex justify-center bg-slate-200 min-w-80 p-1 h-screen text-center'>
-            <div className="max-w-2xl min-w-80 space-y-1">
+        <div className='flex justify-center bg-slate-200 min-w-72 p-1 h-screen text-center'>
+            <div className="max-w-2xl min-w-72 space-y-1">
                 <Title>Novo Cliente</Title>
                 <Subtitle>Insira os dados abaixo:</Subtitle>
                 <ul className="space-y-1">
                     <CheckListItem item="Nome:">
-                        <input type="text" onChange={handleChangeName} className="w-60 rounded-md" id="clientName"></input>
+                        <input type="text" onChange={handleChangeName} className="max-w-60 rounded-md" id="clientName"></input>
                     </CheckListItem>
                     <CheckListItem item="Celular:" >
-                        <input type="tel" id="clientPhone" className="w-60 rounded-md px-2"  onChange={handleChangePhone}/>
+                        <input type="tel" id="clientPhone" className="max-w-60 rounded-md"  onChange={handleChangePhone}/>
                     </CheckListItem>
                     <CheckListItem item="Data:">
-                        <input type="date" placeholder="dd/mm/yyyy" onChange={handleChangeDate} className="w-60 rounded-md px-2" id="clientDate"/>
+                        <input type="date" placeholder="dd/mm/yyyy" onChange={handleChangeDate} className="max-w-60 rounded-md " id="clientDate"/>
                     </CheckListItem>
                     <CheckListItem item="Cidade:">
-                        <input type="text" onChange={handleChangeCity} className="w-60 rounded-md" id="clientCity"></input>
+                        <input type="text" onChange={handleChangeCity} className="max-w-60 rounded-md" id="clientCity"></input>
                     </CheckListItem>
                     <CheckListItem item="Nº de convidados:">
-                        <input type="text" onChange={handleChangeGuests} className="w-40 rounded-md" id="clientGuests"></input>
+                        <input type="text" onChange={handleChangeGuests} className="max-w-40 rounded-md" id="clientGuests"></input>
                     </CheckListItem>
                     <CheckListItem item="Data disponível?">
                         <button  
@@ -92,14 +91,14 @@ function NewClient() {
                         </button>
                     </CheckListItem> 
 
-                    <div className="flex space-x-2 justify-around py-5">
-                        <ButtonMSLATE className="bg-red-200 rounded-md p-1 text-lg w-28"
+                    <div className="flex flex-wrap justify-around py-5">
+                        <ButtonMSLATE 
                         onClick={() =>{
                             navigate('/meucliente/initial/');
                             }}>
                             <Undo2 />Voltar
                         </ButtonMSLATE>
-                        <ButtonMBLUE className="bg-blue-200 rounded-md p-1 text-lg w-28"
+                        <ButtonMBLUE 
                         onClick={() =>{
                             if (clientName === "") {
                                 alert("Não é possível criar um cliente sem nome, crie ao menos uma referência.")
@@ -107,7 +106,6 @@ function NewClient() {
                             addClient(newClient);
                             navigate(`/meucliente/client?id=${String(newClient.id)}`);
                           };
-                            
                             }
                             }>
                             <Save />Salvar

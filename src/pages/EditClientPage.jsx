@@ -55,25 +55,25 @@ function EditClientPage() {
 
     return (
         <div className="flex justify-center">
-        <div className="bg-slate-200 min-w-80 max-w-lg text-center  rounded-md flex-row space-y-3 p-2 h-screen ">
-            <div className="max-w-2xl min-w-80 space-y-1">
+        <div className="bg-slate-200 min-w-72 max-w-lg text-center  rounded-md flex-row space-y-3 p-2 h-screen ">
+            <div className="max-w-2xl min-w-72 space-y-1">
                 <Title>Editar Cliente</Title>
                 <Subtitle>{client.name}</Subtitle>
                 <ul className="space-y-1">
                     <CheckListItem item="Nome:">
-                        <input type="text" onChange={handleChangeName} className="w-60 rounded-md pr-2 text-right" id="clientName" placeholder={client.name}></input>
+                        <input type="text" onChange={handleChangeName} className="max-w-60 rounded-md pr-2 text-right" id="clientName" placeholder={client.name}></input>
                     </CheckListItem>
                     <CheckListItem item="Celular:">
-                        <input type="text" onChange={handleChangePhone} className="w-60 rounded-md pr-2 text-right" id="clientPhone" placeholder={client.phone}></input>
+                        <input type="text" onChange={handleChangePhone} className="max-w-60 rounded-md pr-2 text-right" id="clientPhone" placeholder={client.phone}></input>
                     </CheckListItem>
                     <CheckListItem item="Data:">
-                        <input type="text" onChange={handleChangeDate} className="w-60 rounded-md pr-2 text-right" id="clientDate" placeholder={client.data}></input>
+                        <input type="text" onChange={handleChangeDate} className="max-w-60 rounded-md pr-2 text-right" id="clientDate" placeholder={client.data}></input>
                     </CheckListItem>
                     <CheckListItem item="Cidade:">
-                        <input type="text" onChange={handleChangeCity} className="w-60 rounded-md pr-2 text-right" id="clientCity" placeholder={client.cidade}></input>
+                        <input type="text" onChange={handleChangeCity} className="max-w-60 rounded-md pr-2 text-right" id="clientCity" placeholder={client.cidade}></input>
                     </CheckListItem>
                     <CheckListItem item="Nº de convidados:">
-                        <input type="text" onChange={handleChangeGuests} className="w-40 rounded-md pr-2 text-right" id="clientGuests" placeholder={client.convidados}></input>
+                        <input type="text" onChange={handleChangeGuests} className="max-w-40 rounded-md pr-2 text-right" id="clientGuests" placeholder={client.convidados}></input>
                     </CheckListItem>
                 </ul>
                     <div className="flex flex-wrap justify-around items-center align-middle space-x-2 space-y-2 max-w-96 py-5">

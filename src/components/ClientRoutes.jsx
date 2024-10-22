@@ -9,6 +9,8 @@ import RecicledClientPage from "../pages/RecicledClientPage";
 import LoginPage from "../pages/LoginPage";
 import UserMessages from "../pages/UserMessages";
 import EditMsgBeforeSend from "../pages/EditMsgBeforeSend";
+import AddNewMsg from "../pages/AddNewMsg";
+import EditMsgPage from "../pages/EditMsgPage";
 
 function ClientRoutes () {
     return (
@@ -23,6 +25,8 @@ function ClientRoutes () {
             <Route path="/meucliente/editbeforesend/" element={ <EditMsgBeforeSend /> } ></Route>
             <Route path="/meucliente/" element={ <LoginPage /> } />
             <Route path="/meucliente/editusermessages/" element={<EditUserMessages />}></Route>
+            <Route path="/meucliente/addnewmsg/" element={<AddNewMsg />}></Route>
+            <Route path="/meucliente/editmsgpage/" element={<EditMsgPage />}></Route>
         </Routes>
     )
 }

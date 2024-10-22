@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Title from "../components/Title"
 import Subtitle from "../components/Subtitle"
 import ClientView from "../components/ClientView"
@@ -37,8 +37,8 @@ function InitialPage() {
     }
 
     return (
-        <div className='flex justify-center bg-slate-200 min-w-80 text-center h-screen'>
-            <div className="max-w-xl min-w-80 space-y-2 ">
+        <div className='flex justify-center bg-slate-200 min-w-72 text-center h-screen'>
+            <div className="max-w-xl min-w-72 space-y-2 ">
                 <Title>Meu cliente</Title>
                 
                 <Subtitle>
@@ -59,8 +59,8 @@ function InitialPage() {
                 ? (<>
                     <ClientView></ClientView>
 
-                    <div className="flex flex-col items-center space-y-3">
-                        <div className="flex flex-row justify-evenly max-w-96 space-x-2 ">
+                    <div className="flex flex-wrap justify-center items-center">
+
                             <ButtonMBLUE
                                 onClick={() =>{ navigate('/meucliente/newclient/')}}
                                 title="add client"
@@ -73,8 +73,7 @@ function InitialPage() {
                                 >
                                 <MessageCircleMore />Mensagens
                             </ButtonMGREEN>
-                            </div>
-                            <div className="flex flex-row  justify-evenly max-w-96 space-x-2">
+
                             <ButtonMSLATE
                                 onClick={() =>{ navigate('/meucliente/recicle/')}}
                                 title="recicle"
@@ -87,7 +86,7 @@ function InitialPage() {
                                 >
                                 <LogOut />Sign Out
                             </ButtonMRED>
-                        </div>
+
                     </div>
                 </>)
                 : <LoginComponent></LoginComponent>}

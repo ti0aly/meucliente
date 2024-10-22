@@ -27,7 +27,7 @@ function ClientPage() {
 
     return (
         <div className="flex justify-center">
-            <div className="bg-slate-200 min-w-96 max-w-lg text-center rounded-md space-y-3 p-1">
+            <div className="bg-slate-200 min-w-72 max-w-lg text-center rounded-md space-y-3 p-1">
                 
                 <Title >
                     {client.name}
@@ -38,18 +38,19 @@ function ClientPage() {
 
                 <CheckList clientId={clientId}></CheckList>
 
-                <div className="flex flex-wrap max-w-sm space-x-2 space-y-1 justify-around">
+                <div className="flex flex-wrap max-w-sm justify-around">
                 <ButtonMSLATE
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
                             navigate(`/meucliente/editclient?${query.toString()}`);
                         }}
-                        className="flex justify-center p-1 text-gray-800 w-40 bg-slate-100 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150">
-                        <UserRoundPen />&nbsp;Editar
+                        >
+                        <UserRoundPen />&nbsp;
+                        Editar
                     </ButtonMSLATE>
                     <ButtonMGREEN 
-                        className="flex p-1 justify-center text-gray-800 w-40 bg-green-300 border border-gray-300 rounded-full shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
+                        
                         onClick={() =>{ 
                             const query = new URLSearchParams();
                             query.set("id", client.id);
@@ -61,12 +62,12 @@ function ClientPage() {
                         }}
                         title="my messages"
                         >
-                        <WhatsappIcon></WhatsappIcon>&nbsp;Mensagem
+                        <WhatsappIcon></WhatsappIcon>&nbsp;
+                        Mensagem
                     </ButtonMGREEN>
 
                     <ButtonMSLATE 
-                            className="flex justify-center p-1 text-gray-800 w-40 bg-slate-100 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
-                            onClick={() =>{ navigate(-1)}}
+                            onClick={() =>{ navigate("/meucliente/initial/")}}
                             title="back"
                             >
                         <Undo2 />Voltar 

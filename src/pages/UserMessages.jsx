@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Title from "../components/Title"
 import Subtitle from "../components/Subtitle"
 import MsgView from "../components/MsgView"
@@ -16,8 +16,8 @@ function UserMessages() {
     const client = clients.find(client => client.id === Number(clientId));
 
     return (
-        <div className='flex justify-around min-w-80 w-full bg-slate-200 text-center h-screen'>
-            <div className="min-w-80 max-w-xl space-y-2 ">
+        <div className='flex justify-around min-w-72 w-full bg-slate-200 text-center h-screen'>
+            <div className="min-w-72 max-w-xl space-y-2 ">
                 <Title>Meu cliente</Title>
                 <Subtitle>
                 {userData !== undefined && 
