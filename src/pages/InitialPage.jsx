@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import Title from "../components/Title"
 import Subtitle from "../components/Subtitle"
 import ClientView from "../components/ClientView"
 import { useNavigate } from "react-router-dom";
@@ -11,6 +10,7 @@ import ButtonMSLATE from "../components/ButtonMSLATE";
 import ButtonMBLUE from "../components/ButtonMBLUE";
 import { auth, onAuthStateChanged, signOut } from "../firebase-config";
 import { Trash2, LogOut, UserPlus, Pencil, MessageCircleMore } from "lucide-react";
+import Logotipo from "../components/Logotipo";
 
 function InitialPage() {
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ function InitialPage() {
         
         <div className='flex justify-center bg-slate-200 min-w-72 text-center h-screen'>
             <div className="max-w-xl min-w-72 space-y-2 ">
-                <Title>Meu cliente</Title>
+                <Logotipo />
                 
                 <Subtitle>
                 {userData !== undefined && 
