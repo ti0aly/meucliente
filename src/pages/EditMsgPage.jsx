@@ -11,11 +11,9 @@ function EditMsgPage() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const index = queryParams.get('index');
-
-    const { setUserMessages, userMessages, setDataServer, userData } = useContext(ClientsContext);
-
-    const [editedMsg, setEditedMsg] = useState(userMessages[index]);
     const indexNumber = parseInt(index, 10);
+    const { setUserMessages, userMessages, setDataServer, userData } = useContext(ClientsContext);
+    const [editedMsg, setEditedMsg] = useState(userMessages[indexNumber]);
 
     const handleChangeMsg = (e) => {
         setEditedMsg(e.target.value);  
@@ -39,10 +37,10 @@ function EditMsgPage() {
                 <Subtitle>Edite a mensagem</Subtitle>
                 <textarea 
                     className="w-full max-w-xl h-72 overflow-hidden p-2 rounded-xl" 
-                    name="msgtext" 
-                    id="" 
-                    value={userMessages[indexNumber]}
-                    onChange={handleChangeMsg}>
+                    name="msgtext"
+                    value={editedMsg}
+                    onChange={handleChangeMsg}
+                >
                 </textarea>
                 <div className="flex flex-wrap justify-center">
                     <div  className="p-1">

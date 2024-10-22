@@ -190,7 +190,7 @@ function App() {
   
 
   return (
-    <ClientsContext.Provider value={{clients, userName, userData, userMessages, obterSaudacao, setDataServer, updateClients, addClient, dellClient, setThisUserData, setUserData, handleChangeCustomUserName, setUserMessages}}>
+    <ClientsContext.Provider value={{clients, userName, userData, userMessages, obterSaudacao, setDataServer, updateClients, addClient, dellClient, setThisUserData, setUserData, handleChangeCustomUserName, setUserMessages, formatVariableString}}>
       <ClientRoutes/>
     </ClientsContext.Provider>
   )

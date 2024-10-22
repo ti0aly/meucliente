@@ -21,10 +21,7 @@ function EditMsgView() {
     // console.log("userData: ", userData); // userData.email or (displayName - photoURL - uid) 
     // console.log("userName: ", userName); // Esse nome já é o nome customizado
     
-    const client = {
-        data: "João"
-    }
-    
+   
     return (
         <div>
             <div>

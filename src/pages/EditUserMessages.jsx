@@ -1,17 +1,13 @@
-import { useContext } from "react";
 import Title from "../components/Title"
 import Subtitle from "../components/Subtitle"
 import EditMsgView from "../components/EditMsgView"
 import { useNavigate } from "react-router-dom";
-import ClientsContext from "../contexts/ClientsContext";
 import { Undo2, MailPlus } from "lucide-react";
 import ButtonMSLATE from "../components/ButtonMSLATE";
 import ButtonMBLUE from "../components/ButtonMBLUE";
 
 function EditUserMessages() {
     const navigate = useNavigate();
-    const {clients, userData, userName, userMessages } = useContext(ClientsContext);
-
 
     return (
         <div className='flex justify-around min-w-72 w-full bg-slate-200 text-center p-4'>
@@ -36,13 +32,12 @@ function EditUserMessages() {
                             onClick={() =>{ navigate(-1)}}
                             title="back"
                             >
-                        <Undo2 />Voltar 
+                            <Undo2 />Voltar 
                         </ButtonMSLATE>
                         <ButtonMBLUE 
                             className="flex justify-center p-1 text-gray-800 w-40 bg-green-300 border border-gray-300 rounded-full shadow hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
                             onClick={() =>{ navigate("/meucliente/addnewmsg/")}}
                             >
-                            
                             <MailPlus />Add Msg
                         </ButtonMBLUE>
 
