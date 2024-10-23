@@ -9,7 +9,7 @@ import ButtonMSLATE from "../components/ButtonMSLATE";
 function EditMsgBeforeSend() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { msg, phone } = location.state || {};
+    const { msgFormatada, phone } = location.state || {};
     const [editedMsg, setEditedMsg] = useState();
 
     const handleChangeMsg = (e) => {
@@ -30,7 +30,7 @@ function EditMsgBeforeSend() {
                     className="w-full max-w-xl h-72 overflow-hidden p-2 rounded-xl" 
                     name="msgtext" 
                     id="" 
-                    defaultValue={msg}
+                    defaultValue={msgFormatada}
                     onChange={handleChangeMsg}>
                 </textarea>
                 <div className="flex flex-wrap justify-center">
@@ -53,7 +53,7 @@ function EditMsgBeforeSend() {
                                 if (editedMsg !== undefined) {
                                     formattedMsg = encodeURIComponent(editedMsg);
                                 } else {
-                                    formattedMsg = encodeURIComponent(msg);
+                                    formattedMsg = encodeURIComponent(msgFormatada);
                                 }
                                 const whatsappURL = `https://api.whatsapp.com/send?phone=${phone}&text=${formattedMsg}`;
                                 window.open(whatsappURL, '_blank')

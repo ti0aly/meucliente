@@ -175,7 +175,7 @@ function App() {
     const variableUserName = objectWithParams.userName;
     const data = objectWithParams.data;
     const formatedData = formatDataBr(data);
-    const saudacao = obterSaudacao();
+    const saudacao = obterSaudacao(); 
     let newString = str
       .replace(/&cliente/g, variableClientName.split(' ')[0]) // first name only 
       .replace(/&meunome/g, variableUserName)

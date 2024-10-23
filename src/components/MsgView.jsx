@@ -30,9 +30,17 @@ function MsgView() {
                                 <button 
                                     className="bg-slate-200 p-2 rounded-lg flex justify-center"
                                     onClick={() => {
-                                            const phone = client.phone;
+                                        const phone = client.phone;
+                                        const clientName = client.name;
+                                        const data = client.data;
+                                        const objectWithParams = {
+                                            clientName,
+                                            userName,
+                                            data,
+                                        }
+                                        const msgFormatada = formatVariableString(msg, objectWithParams);
                                             navigate('/editbeforesend/', {
-                                                state: { msg , phone }
+                                                state: { msgFormatada , phone }
                                         })
                                         }
                                     }
