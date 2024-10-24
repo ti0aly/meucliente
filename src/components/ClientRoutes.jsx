@@ -12,6 +12,7 @@ import EditMsgBeforeSend from "../pages/EditMsgBeforeSend";
 import AddNewMsg from "../pages/AddNewMsg";
 import EditMsgPage from "../pages/EditMsgPage";
 import AutoClient from "../pages/AutoClient";
+import Settings from "../pages/Settings";
 
 function ClientRoutes () {
     return (
@@ -30,7 +31,7 @@ function ClientRoutes () {
             <Route path="/addnewmsg/" element={<AddNewMsg />}></Route>
             <Route path="/editmsgpage/" element={<EditMsgPage />}></Route>
             <Route path="/autoclient/" element={<AutoClient />}></Route>
-
+            <Route path="/settings/" element={<Settings />}></Route>
         </Routes>
         
     )

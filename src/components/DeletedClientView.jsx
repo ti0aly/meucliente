@@ -22,26 +22,36 @@ function DeletedClientView() {
         }
         return (formatedDate)
     }
+    const viewName = (name) => {
+        let formattedName = name
+        
+        if (name.split(' ').length > 1) {
+            formattedName = name.split(' ')[0] + ' ' + name.split(' ')[1][0] + '.'; 
+        }
+        return formattedName
+    } 
 
 
     return (
-     <div className="bg-slate-300 rounded-md flex justify-evenly flex-wrap gap-2 p-1 text-lg space-x-2" >
+        <div className="rounded-xl flex justify-around flex-wrap gap-[1px] py-1 text-lg" >
+            
         { 
             clients !== undefined &&
             clients.filter((client) => client.isDeleted === true).map((client) =>
             <ul key={client.id}>
                 <li>
                     <button 
-                        className="p-2 bg-red-100 w-40 rounded-md shadow-md border-slate-500" 
+                        className="opacity-80 py-1 border-[#202b27] min-w-32 max-w-48 bg-[#d7ffec] rounded-xl shadow-md border-2 hover:shadow-xl  " 
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
                             navigate(`/editdeletedclient?${query.toString()}`);
                         }}
                         >
-                        <p className="text-base text-red-800 font-semibold w-36 overflow-hidden">{client.name}</p>
-                        <p className="text-sm"> {client.data !== "" && '(' + formatDate(client.data) + ')' || "(Data do evento)"}</p>
-                        <p className="text-slate-400 text-base">{status[client.clientStatus]}</p>                    </button>
+                        <p className="text-[#202b27] text-base font-semibold w-32 overflow-hidden">{(viewName(client.name))}</p>
+                        <p className="text-xs"> {client.data !== "" && '(' + formatDate(client.data) + ')' || "(Data do evento)"}</p>
+                        <p className="text-[#2A2F34] text-xs w-32 overflow-hidden">{status[client.clientStatus]}</p>
+                        </button>
                 </li>
             </ul>
 

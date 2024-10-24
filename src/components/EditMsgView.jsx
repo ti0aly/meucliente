@@ -28,20 +28,19 @@ function EditMsgView() {
                 <ul className="space-y-2">
                     {
                     userMessages.map((msg, index) =>
-                        <li key={index} className="flex justify-between p-2 space-x-1 rounded-lg bg-white">
+                        <li key={index} className="flex justify-between p-[2px] border border-[#202b27] rounded-lg m-1 bg-white">
                             <p 
-                                className="text-base rounded-lg p-2 bg-white-100 text-justify w-full resize-none overflow-hidden"
+                                className="text-sm text-[#202b27] rounded-lg p-2 bg-white text-justify w-full resize-none overflow-hidden"
                             >
                                 {msg}
                             </p>
-                            <div className="flex flex-col justify-end space-y-1 rounded-lg">
-                                <button className="bg-red-200 p-2 rounded-lg flex justify-center"
+                            <div className="flex flex-col justify-start space-y-1 rounded-lg">
+                                <button className="bg-[#94c5b3] p-1 border-2 border-[#26312d] rounded-lg flex justify-center"
                                     onClick={() => {
-
                                         handleRemoveUserMessage(index)
                                     }}    
                                 >
-                                    <X className="w-4"/>
+                                    <X className="w-5 "/>
                                 </button>
 {/* 
                                 <button className="bg-slate-200 p-2 rounded-lg flex justify-center"
@@ -56,7 +55,7 @@ function EditMsgView() {
                                 </button> */}
 
                                 <button 
-                                    className="bg-slate-200 p-2 rounded-lg flex justify-center"
+                                    className="bg-[#94c5b3] p-1 border-2 border-[#26312d] rounded-lg flex justify-center"
                                     onClick={() => {
                                         const query = new URLSearchParams();
                                         // query.set("msg", msg);

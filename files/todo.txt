@@ -1,6 +1,5 @@
 Tarefas
 
-
 - página de solicitação de orçamento (gerar um link para que o cliente faça a solicitação)
 
 - ajustar layout profissional
@@ -13,12 +12,47 @@ Tarefas
 
 - gerenciamento de mensagens
 
-- 
+Banco de dados:
+    - clientesdegusta (armezana os clientes cadastrados de cada user)
+    - msgsdegusta (armazena as mensagens de cada user)  
+    - agendadegusta (armazena todos agendamentos de cada user)
+    - usersdegusta (armazena as configurações de cada user - nome custom, empresa, settings da plataforma)
+
+O link do agendamento relacionado com o cliente será o Telefone informado (aparecerá card do cliente cadastrado) 
+
+Cores gpt
+
+Azul-claro: #77C3D4
+Verde-menta: #A4D8C5
+Cinza escuro (para o texto): #2A2F34
+Bege: #F5EDE4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 -----------------------------------------------------------------
-- tratar os erros com redirecionamento:
+- tratar os erros com redirecionamentos:
 
 isso aqui se tiver map nas views:
 <>

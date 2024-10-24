@@ -5,7 +5,7 @@ import ClientsContext from "../contexts/ClientsContext";
 import ButtonMRED from "../components/ButtonMRED";
 import ButtonMBLUE from "../components/ButtonMBLUE";
 import { ChevronLeftIcon, History, Trash2 } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 

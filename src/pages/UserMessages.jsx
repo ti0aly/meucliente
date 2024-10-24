@@ -7,6 +7,7 @@ import ClientsContext from "../contexts/ClientsContext";
 import LoginComponent from "../components/LoginComponent";
 import { Undo2, Pencil } from "lucide-react";
 import WhatsappIcon from "../components/WhatsappIcon";
+import NavBar from "../components/NavBar";
 
 function UserMessages() {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ function UserMessages() {
     return (
         <div className='flex justify-around min-w-72 w-full bg-slate-200 text-center h-screen'>
             <div className="min-w-72 max-w-xl space-y-2 ">
-                <Title>Meu cliente</Title>
+                <Title></Title>
                 <Subtitle>
                 {userData !== undefined && 
                 <>
@@ -35,7 +36,8 @@ function UserMessages() {
                 || "Você precisa estar logado."}
                 </Subtitle>
                 {userData !== undefined
-                ? (<>
+                ? (<div className="bg-[#F5EDE4] m-1 rounded-b-lg rounded-tr-lg shadow-lg" >
+                    <NavBar namePage={"Mensagens"}></NavBar>
                     <MsgView></MsgView>
                     <div className="flex flex-wrap justify-evenly">
                         <button 
@@ -57,7 +59,7 @@ function UserMessages() {
                         </button>
 
                     </div>
-                </>)
+                </div>)
                 : <LoginComponent></LoginComponent>}
             </div>
         </div>

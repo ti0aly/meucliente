@@ -23,10 +23,17 @@ function ClientView() {
         }
         return (formatedDate)
     }
-    
+    const viewName = (name) => {
+        let formattedName = name
+        
+        if (name.split(' ').length > 1) {
+            formattedName = name.split(' ')[0] + ' ' + name.split(' ')[1][0] + '.'; 
+        }
+        return formattedName
+    } 
 
     return (
-     <div className="bg-slate-300 rounded-xl flex justify-evenly flex-wrap gap-2 p-2 text-lg" >
+     <div className="rounded-xl flex items-stretch justify-center flex-wrap gap-[1px] py-1 text-lg" >
         
         { 
         clients !== undefined &&
@@ -36,16 +43,16 @@ function ClientView() {
             <ul key={client.id}>
                 <li>
                     <button 
-                        className="p-2 bg-slate-100 w-40 rounded-lg shadow-md border-slate-500" 
+                        className="py-1 border-[#202b27] min-w-32 max-w-48 bg-[#d7ffec] rounded-xl shadow-md border-2 hover:shadow-xl  " 
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
                             navigate(`/client?${query.toString()}`);
                         }}
                         >
-                        <p className="text-base font-semibold w-36 overflow-hidden">{(client.name)}</p>
-                        <p className="text-sm"> {client.data !== "" && '(' + formatDate(client.data) + ')' || "(Data do evento)"}</p>
-                        <p className="text-slate-400 text-base">{status[client.clientStatus]}</p>
+                        <p className="text-[#202b27] text-base font-semibold w-32 overflow-hidden">{(viewName(client.name))}</p>
+                        <p className="text-xs"> {client.data !== "" && '(' + formatDate(client.data) + ')' || "(Data do evento)"}</p>
+                        <p className="text-[#2A2F34] text-xs w-32 overflow-hidden">{status[client.clientStatus]}</p>
                         
                     </button>
                     

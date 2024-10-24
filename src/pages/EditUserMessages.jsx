@@ -1,12 +1,12 @@
 import Title from "../components/Title"
-import Subtitle from "../components/Subtitle"
 import EditMsgView from "../components/EditMsgView"
 import { useNavigate } from "react-router-dom";
-import { Undo2, MailPlus } from "lucide-react";
-import ButtonMSLATE from "../components/ButtonMSLATE";
-import ButtonMBLUE from "../components/ButtonMBLUE";
+import { MailPlus } from "lucide-react";
+import ButtonM from "../components/ButtonM";
 import { useEffect, useContext } from "react";
 import ClientsContext from "../contexts/ClientsContext";
+import NavBar from "../components/NavBar";
+import InfoBar2 from "../components/InfoBar2";
 
 function EditUserMessages() {
     const navigate = useNavigate();
@@ -21,44 +21,41 @@ function EditUserMessages() {
     return (
     <>
         { userData !== undefined ? (
-            <div className='flex justify-around min-w-72 w-full bg-slate-200 text-center p-4'>
-                <div className="min-w-72 max-w-xl space-y-2 ">
-                    <Title>Meu cliente</Title>
-                    <Subtitle>Minhas mensagens</Subtitle>
-                    <div className="rounded-lg border border-white">
-                        <h1>Economize seu tempo, utilize variáveis para tornar suas mensagens mais eficientes:</h1>
-
-                        <ul className="max-w-64 mx-auto text-justify ">
-                            <li><strong>&meunome</strong>- (adiciona seu nome)</li>
-                            <li><strong>&cliente</strong> - (nome do seu cliente)</li>
-                            <li><strong>&data</strong> - (data do serviço)</li>
-                            <li><strong>&ola</strong> - (bom dia/tarde/noite)</li>
-                        </ul>
-                    </div>
-                    <>
-                        
+            <div className='flex justify-around min-w-72 w-full bg-white text-center p-1 pt-3'>
+                    <div className="min-w-72 max-w-xl space-y-2 ">
+                        <InfoBar2 />
+                    <Title></Title>
+                    
+                    
+                    <div className="bg-[#ffeedb] m-1 rounded-b-lg rounded-tr-lg shadow-lg" >
+                            <NavBar namePage={"Mensagens"}></NavBar>
+                                <div className="flex justify-between p-2 min-w-28">
+                                    <div className="rounded-lg border-2 p-1 border-white">
+                                    <ul className="max-w-64 text-justify text-sm ">
+                                        <li className="text-center">Variáveis:</li>
+                                        <li><strong>&meunome / &cliente / &data / &ola </strong>, </li>
+                                    </ul>
+                                </div>
+                            <div className="">
+                                <ButtonM
+                                    onClick={() =>{ navigate("/addnewmsg/")}}
+                                    >
+                                    <MailPlus className="h-5 w-5" />
+                                </ButtonM>
+                            </div>
+                            </div>
                         <EditMsgView></EditMsgView>
                         
-                        <div className="flex flex-wrap justify-evenly">
-                            <ButtonMSLATE 
-                                className="flex justify-center p-1 text-gray-800 w-40 bg-slate-100 border border-gray-300 rounded-full shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
-                                onClick={() =>{ navigate(-1)}}
-                                title="back"
-                                >
-                                <Undo2 />Voltar 
-                            </ButtonMSLATE>
-                            <ButtonMBLUE 
-                                className="flex justify-center p-1 text-gray-800 w-40 bg-green-300 border border-gray-300 rounded-full shadow hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-150" 
-                                onClick={() =>{ navigate("/addnewmsg/")}}
-                                >
-                                <MailPlus />Add Msg
-                            </ButtonMBLUE>
+                        
 
-                        </div>
-                    </>
+                    </div>
+                    </div>
+                    
                 </div>
-            </div>)
+                
+            )
                 : (null)}
+
             </>
     )
 }
