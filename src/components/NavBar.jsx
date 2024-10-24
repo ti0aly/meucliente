@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function NavBar({ props, namePage }) {
     const navigate = useNavigate();
     return (
-        <div className="bg-white flex justify-start">
+        <div className="flex justify-start">
             <NavBarBt
                 namePage={namePage}
                 onClick={() =>{ navigate('/initial/')}}
@@ -14,7 +14,7 @@ function NavBar({ props, namePage }) {
                 onClick={() =>{ navigate('/editusermessages/')}}
             >Mensagens</NavBarBt>
             <NavBarBt
-                onClick={() =>{ navigate('/editusermessages/')}}
+                onClick={() =>{ navigate('/schedule/')}}
                 namePage={namePage}
             >Agenda</NavBarBt>
         </div>

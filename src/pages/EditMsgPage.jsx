@@ -1,10 +1,12 @@
 import { useContext, useState} from "react"
 import { useLocation, useNavigate } from "react-router-dom";
-import Subtitle from "../components/Subtitle";
+import Title from "../components/Title";
 import { Save, Undo2 } from "lucide-react";
 import ButtonMBLUE from "../components/ButtonMBLUE";
 import ButtonMSLATE from "../components/ButtonMSLATE";
 import ClientsContext from "../contexts/ClientsContext";
+import InfoBar2 from "../components/InfoBar2";
+import Variables from "../components/Variables";
 
 function EditMsgPage() {
     const navigate = useNavigate();
@@ -30,13 +32,14 @@ function EditMsgPage() {
     // }, [editedMsg])
 
     return (
-        <div className='flex flex-col items-center min-w-40 w-full bg-slate-200 text-center h-screen'>
-            
-            <div className="max-w-xl space-y-2 ">
-                
-                <Subtitle>Edite a mensagem</Subtitle>
+        <div className='flex flex-col items-center min-w-40 w-full bg-white text-center pt-5'>
+            <InfoBar2 />
+            <Title ></Title>
+            <div className="max-w-xl space-y-2 border-2 p-1 border-mcverdeescuro bg-mcmenta rounded-xl ">
+                <p className="font-custom font-semibold text-mcverdeescuro">Edite e salve:</p>
+                <Variables></Variables>
                 <textarea 
-                    className="w-full max-w-xl h-72 overflow-hidden p-2 rounded-xl" 
+                    className="w-full max-w-xl h-72 overflow-hidden p-2 rounded-xl border" 
                     name="msgtext"
                     value={editedMsg}
                     onChange={handleChangeMsg}

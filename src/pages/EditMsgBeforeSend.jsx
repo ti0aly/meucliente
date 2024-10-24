@@ -1,4 +1,4 @@
-import { useState} from "react"
+import { useRef, useState} from "react"
 import { useLocation, useNavigate } from "react-router-dom";
 import Subtitle from "../components/Subtitle";
 import WhatsappIcon from "../components/WhatsappIcon";
@@ -12,8 +12,13 @@ function EditMsgBeforeSend() {
     const { msgFormatada, phone } = location.state || {};
     const [editedMsg, setEditedMsg] = useState();
 
+    const textareaRef = useRef(null);
+
+
     const handleChangeMsg = (e) => {
         setEditedMsg(e.target.value);  
+        textareaRef.current.style.height = 'auto';
+        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
 
     // useEffect(() => {
@@ -25,7 +30,6 @@ function EditMsgBeforeSend() {
             
             <div className="max-w-xl space-y-2 ">
                 
-                <Subtitle>Edite e envie</Subtitle>
                 <textarea 
                     className="w-full max-w-xl h-72 overflow-hidden p-2 rounded-xl" 
                     name="msgtext" 
@@ -34,7 +38,7 @@ function EditMsgBeforeSend() {
                     onChange={handleChangeMsg}>
                 </textarea>
                 <div className="flex flex-wrap justify-center">
-<div  className="p-1">
+                <div  className="p-1">
     
                         <ButtonMSLATE
     

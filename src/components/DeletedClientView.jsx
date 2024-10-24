@@ -1,18 +1,11 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import  ClientsContext from "../contexts/ClientsContext";
+import { Trash2 } from "lucide-react";
 
 
 function DeletedClientView() {
     const navigate = useNavigate();
-    const status = [
-        "Primeiro contato", 
-        "Enviar orçamento", 
-        "Feedback orçamento", 
-        "Fazer contrato", 
-        "Receber entrada", 
-        "Venda finalizada"
-      ];
     const {clients } = useContext(ClientsContext);
     const formatDate = (dateReceived) => {
         const splitedDate = dateReceived.split('-');        
@@ -49,8 +42,7 @@ function DeletedClientView() {
                         }}
                         >
                         <p className="text-[#202b27] text-base font-semibold w-32 overflow-hidden">{(viewName(client.name))}</p>
-                        <p className="text-xs"> {client.data !== "" && '(' + formatDate(client.data) + ')' || "(Data do evento)"}</p>
-                        <p className="text-[#2A2F34] text-xs w-32 overflow-hidden">{status[client.clientStatus]}</p>
+                        <Trash2 className="mx-auto opacity-50"/>
                         </button>
                 </li>
             </ul>

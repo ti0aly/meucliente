@@ -10,11 +10,11 @@ function RecicledClientPage() {
     return (
         <div className='flex justify-center min-w-72 text-center h-screen'>
             <InfoBar2/>
-            <div className="max-w-xl min-w-72 space-y-1 justify-center pt-5">
+            <div className="max-w-xl min-w-72 space-y-1 justify-center pt-3">
                 
                 <Title></Title>
                 
-                <div className="bg-[#ffeedb] m-1 rounded-bl-xl rounded-xl " >
+                <div className="bg-mcbege m-1 rounded-bl-xl rounded-xl " >
                     
                     <div className="flex justify-between p-1 items-end">
                     <h1 className="text-xl font-semibold">Lista de clientes Excluídos:</h1>

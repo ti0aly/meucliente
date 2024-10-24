@@ -6,7 +6,9 @@ import ButtonM from "../components/ButtonM";
 import { useEffect, useContext } from "react";
 import ClientsContext from "../contexts/ClientsContext";
 import NavBar from "../components/NavBar";
-import InfoBar2 from "../components/InfoBar2";
+import InfoBar2 from "../components/Infobar2";
+import Variables from "../components/Variables";
+
 
 function EditUserMessages() {
     const navigate = useNavigate();
@@ -22,20 +24,15 @@ function EditUserMessages() {
     <>
         { userData !== undefined ? (
             <div className='flex justify-around min-w-72 w-full bg-white text-center p-1 pt-3'>
-                    <div className="min-w-72 max-w-xl space-y-2 ">
-                        <InfoBar2 />
+                    <div className="min-w-72 max-w-xl ">
+                        <InfoBar2 ></InfoBar2>
                     <Title></Title>
                     
-                    
-                    <div className="bg-[#ffeedb] m-1 rounded-b-lg rounded-tr-lg shadow-lg" >
-                            <NavBar namePage={"Mensagens"}></NavBar>
+                    <NavBar namePage={"Mensagens"}></NavBar>
+                    <div className="bg-mcbege rounded-b-lg rounded-tr-lg shadow-lg" >
+                            
                                 <div className="flex justify-between p-2 min-w-28">
-                                    <div className="rounded-lg border-2 p-1 border-white">
-                                    <ul className="max-w-64 text-justify text-sm ">
-                                        <li className="text-center">Variáveis:</li>
-                                        <li><strong>&meunome / &cliente / &data / &ola </strong>, </li>
-                                    </ul>
-                                </div>
+                                    <Variables />
                             <div className="">
                                 <ButtonM
                                     onClick={() =>{ navigate("/addnewmsg/")}}

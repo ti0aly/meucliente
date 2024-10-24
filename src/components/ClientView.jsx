@@ -43,16 +43,16 @@ function ClientView() {
             <ul key={client.id}>
                 <li>
                     <button 
-                        className="py-1 border-[#202b27] min-w-32 max-w-48 bg-[#d7ffec] rounded-xl shadow-md border-2 hover:shadow-xl  " 
+                        className="py-1 border-mcverdeescuro min-w-32 max-w-48 bg-mcmenta rounded-xl shadow-md border-2 hover:shadow-xl  " 
                         onClick={() => {
                             const query = new URLSearchParams();
                             query.set("id", client.id);
                             navigate(`/client?${query.toString()}`);
                         }}
                         >
-                        <p className="text-[#202b27] text-base font-semibold w-32 overflow-hidden">{(viewName(client.name))}</p>
+                        <p className="text-mcborder-mcverdeescuro text-base font-semibold w-32 overflow-hidden">{(viewName(client.name))}</p>
                         <p className="text-xs"> {client.data !== "" && '(' + formatDate(client.data) + ')' || "(Data do evento)"}</p>
-                        <p className="text-[#2A2F34] text-xs w-32 overflow-hidden">{status[client.clientStatus]}</p>
+                        <p className="text-mcverdeescuro text-xs w-32 overflow-hidden">{status[client.clientStatus]}</p>
                         
                     </button>
                     

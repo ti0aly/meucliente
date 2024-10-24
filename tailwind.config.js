@@ -9,6 +9,12 @@ export default {
       fontFamily: {
         custom: ["Outfit", "sans-serif"],
       },
+      colors: {
+        mcbege: '#ffeedb',
+        mcmenta: '#d7ffec',
+        mcverdeescuro: '#202b27',   
+        mcazul: "#77C3D4" , 
+      },
     },
     plugins: [
     ],

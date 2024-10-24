@@ -2,7 +2,7 @@ function NavBarBt({ children, namePage, onClick }) {
     return (
         <button
             onClick={onClick}
-            className={`bg-[#ffeedb] rounded-t-lg text-[#202b27] text-base px-3 font-semibold font-Outfit mr-[1px] ${(children === namePage) ? '' : 'opacity-60'}`}>
+            className={`bg-mcbege rounded-t-lg text-mcverdeescuro text-lg px-2 font-semibold font-custom mr-[1px] ${(children === namePage) ? '' : 'opacity-50'}`}>
             {children}
         </button>
     );

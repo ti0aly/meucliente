@@ -31,14 +31,14 @@ function InitialPage() {
     return (
         
         <div className='flex justify-center  bg-white min-w-72 text-center h-screen p-1 pt-3 '>
-            <div className="max-w-xl min-w-72 space-y-2 ">
+            <div className="max-w-xl min-w-72 ">
                 <InfoBar2 ></InfoBar2>
                 <Title ></Title>
-                
+                <NavBar namePage={"Clientes"}></NavBar>
 
                 {userData !== undefined
-                    ? (<div className="bg-[#ffeedb] m-1 rounded-bl-xl rounded-br-xl  rounded-tr-xl" >
-                        <NavBar namePage={"Clientes"}></NavBar>
+                    ? (<div className="bg-mcbege rounded-bl-xl rounded-br-xl  rounded-tr-xl w-full" >
+                        
                             <div className="flex justify-end shadow-black p-2">
                                 <ButtonM
                                     onClick={() =>{ navigate('/newclient/')}}

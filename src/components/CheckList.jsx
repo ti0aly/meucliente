@@ -20,7 +20,7 @@ function CheckList(props) {
                         onClick={() => updateClients(Number(clientId),  {isDataAvailable : !client.isDataAvailable } )} 
                         >
                         {client.isDataAvailable
-                         && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                         && <Check className="text-green-700"></Check> || <X className="text-red-500"></X>}
                     </button>
                 </CheckListItem> 
 
@@ -29,7 +29,7 @@ function CheckList(props) {
                         onClick={() => updateClients(Number(clientId),  {isClienteContacted : !client.isClienteContacted } )} 
                         >
                         {client.isClienteContacted
-                         && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                         && <Check className="text-green-700"></Check> || <X className="text-red-500"></X>}
                     </button>
                 </CheckListItem>
               
@@ -37,7 +37,7 @@ function CheckList(props) {
                         <button  
                             onClick={() => updateClients(Number(clientId),  {isBudgetSentToClient: !client.isBudgetSentToClient} )} 
                             >
-                            {client.isBudgetSentToClient && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                            {client.isBudgetSentToClient && <Check className="text-green-700"></Check> || <X className="text-red-500"></X>}
                         </button>
                 </CheckListItem> 
 
@@ -46,7 +46,7 @@ function CheckList(props) {
                     <button  
                         onClick={() => updateClients(Number(clientId),  {isBudgetResponded: !client.isBudgetResponded} )} 
                         >
-                        {client.isBudgetResponded && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                        {client.isBudgetResponded && <Check className="text-green-700"></Check> || <X className="text-red-500"></X>}
                     </button>
                 </CheckListItem> 
 
@@ -54,7 +54,7 @@ function CheckList(props) {
                     <button  
                         onClick={() => updateClients(Number(clientId),  {isContractCreated: !client.isContractCreated} )} 
                         >
-                        {client.isContractCreated && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                        {client.isContractCreated && <Check className="text-green-700"></Check> || <X className="text-red-500"></X>}
                     </button>
                 </CheckListItem> 
 
@@ -63,7 +63,7 @@ function CheckList(props) {
                     <button 
                         onClick={() => updateClients(Number(clientId),  {isDepositPaid: !client.isDepositPaid} )} 
                         >
-                        {client.isDepositPaid && <Check className="text-green-700"></Check> || <X className="text-slate-400"></X>}
+                        {client.isDepositPaid && <Check className="text-green-700"></Check> || <X className="text-red-500"></X>}
                     </button>
                 </CheckListItem> 
 

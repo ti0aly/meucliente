@@ -1,18 +1,43 @@
-import { useContext } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import ClientsContext from "../contexts/ClientsContext";
-import { Pencil } from "lucide-react";
-import WhatsappIconMini from "./WhatsappIcon";
+import WhatsappIconGreen from "./WhatsappIconGreen";
 
 function MsgView() {
+    const [editedMsg, setEditedMsg] = useState({});
     const {clients, userMessages, formatVariableString, userName } = useContext(ClientsContext);
-    const navigate = useNavigate();
     const [params] = useSearchParams();
     const clientId = params.get('id');
     const client = clients.find(client => client.id === Number(clientId));
+    const phone = client.phone;
+    const clientName = client.name;
+    const data = client.data;
+    const objectWithParams = {
+        clientName,
+        userName,
+        data,
+    }
 
+    const textareaRefs = useRef([]);
 
+    const handleChangeMsg = (index, e) => {
+        const newValue = e.target.value;
+        setEditedMsg(prevState => ({
+            ...prevState,
+            [index]: newValue
+        }));
+        textareaRefs.current[index].style.height = 'auto';
+        textareaRefs.current[index].style.height = `${textareaRefs.current[index].scrollHeight}px`;
+    }
 
+    useEffect(() => {
+        userMessages.forEach((_, index) => {
+            if (textareaRefs.current[index]) {
+                textareaRefs.current[index].style.height = 'auto';
+                textareaRefs.current[index].style.height = `${textareaRefs.current[index].scrollHeight}px`;
+            }
+        });
+    }, [userMessages]);
 
     return (
         <div>
@@ -20,64 +45,32 @@ function MsgView() {
                 <ul className="space-y-2">
                     {
                     userMessages.map((msg, index) =>
-                        <li key={index} className="flex justify-between p-2 space-x-1 rounded-lg bg-white">
-                            <p 
-                                className="text-base rounded-lg p-2 bg-white-100 text-justify w-full resize-none overflow-hidden"
-                            >
-                                {msg}
-                            </p>
+                        <li key={index}  className="flex justify-between p-2 space-x-1 rounded-lg bg-white">
+                            <textarea 
+                                ref={el => textareaRefs.current[index] = el}
+                                onChange={(e) => handleChangeMsg(index, e)}
+                                defaultValue={formatVariableString(msg, objectWithParams)}
+                                className="w-full max-w-xl overflow-hidden p-2 rounded-xl font-custom"
+                                style={{ resize: 'none' }} 
+                            />
                             <div className="flex flex-col justify-end space-y-1 rounded-lg">
                                 <button 
-                                    className="bg-slate-200 p-2 rounded-lg flex justify-center"
+                                    className=""
                                     onClick={() => {
-                                        const phone = client.phone;
-                                        const clientName = client.name;
-                                        const data = client.data;
-                                        const objectWithParams = {
-                                            clientName,
-                                            userName,
-                                            data,
-                                        }
-                                        const msgFormatada = formatVariableString(msg, objectWithParams);
-                                            navigate('/editbeforesend/', {
-                                                state: { msgFormatada , phone }
-                                        })
-                                        }
-                                    }
-                                    >
-                                    <Pencil className="w-5"/>
-                                </button>
-                                <button 
-                                    className="bg-green-300 p-2 rounded-lg flex justify-center"
-                                    onClick={() => {
-                                        const phone = client.phone;
-                                        const clientName = client.name;
-                                        const data = client.data;
-                                        const objectWithParams = {
-                                            clientName,
-                                            userName,
-                                            data,
-                                        }
-                                        const msgFormatada = formatVariableString(msg, objectWithParams);
-                                        const msgToSend = encodeURIComponent(msgFormatada);
+                                        const currentMsg = editedMsg[index] || formatVariableString(msg, objectWithParams);
+                                        const msgToSend = encodeURIComponent(currentMsg);
                                         window.open(`https://api.whatsapp.com/send?phone=+55${phone}&text=${msgToSend}`, '_blank')
                                     }}
-                                    >
-                                <WhatsappIconMini></WhatsappIconMini>
+                                >
+                                    <WhatsappIconGreen />
                                 </button>
                             </div>
-
                         </li>
-                        )
-                    }
-
+                    )}
                 </ul>
             </div>
         </div>
-
     )
 }
-
-
 
 export default MsgView;

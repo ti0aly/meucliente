@@ -28,14 +28,14 @@ function EditMsgView() {
                 <ul className="space-y-2">
                     {
                     userMessages.map((msg, index) =>
-                        <li key={index} className="flex justify-between p-[2px] border border-[#202b27] rounded-lg m-1 bg-white">
+                        <li key={index} className="flex justify-between p-[2px] border border-mcverdeescuro rounded-lg m-1 bg-white">
                             <p 
-                                className="text-sm text-[#202b27] rounded-lg p-2 bg-white text-justify w-full resize-none overflow-hidden"
+                                className="text-sm text-mcverdeescuro rounded-lg p-2 bg-white text-justify w-full resize-none overflow-hidden"
                             >
                                 {msg}
                             </p>
                             <div className="flex flex-col justify-start space-y-1 rounded-lg">
-                                <button className="bg-[#94c5b3] p-1 border-2 border-[#26312d] rounded-lg flex justify-center"
+                                <button className="bg-mcmenta p-1 border-2 border-mcverdeescuro rounded-lg flex justify-center"
                                     onClick={() => {
                                         handleRemoveUserMessage(index)
                                     }}    
@@ -55,7 +55,7 @@ function EditMsgView() {
                                 </button> */}
 
                                 <button 
-                                    className="bg-[#94c5b3] p-1 border-2 border-[#26312d] rounded-lg flex justify-center"
+                                    className="bg-mcmenta p-1 border-2 border-[#26312d] rounded-lg flex justify-center"
                                     onClick={() => {
                                         const query = new URLSearchParams();
                                         // query.set("msg", msg);
